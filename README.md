@@ -35,6 +35,7 @@ This site is built using simple, reliable web tech:
 
 No backend required — everything runs client-side.
 
+## 📁 Project Structure
 ```
 ├── .gitignore  
 ├── CNAME  
@@ -48,9 +49,7 @@ No backend required — everything runs client-side.
 
 This repo only contains what’s needed to run the live website.  
 IDE files (like `.idea/`) are intentionally excluded.
-
 ```
-
 ## 🚀 Deployment
 
 The site is deployed automatically using **GitHub Pages**:
@@ -85,5 +84,3 @@ https://github.com/omueller5
 ---
 
 © Owen Lab — All rights reserved.
-## 📁 Project Structure
-
