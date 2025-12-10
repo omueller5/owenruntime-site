@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owen Runtime</title>
+
+    <!-- Link to your CSS -->
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-$END$
+<header class="hero">
+    <div class="hero-inner">
+        <h1>Owen Runtime</h1>
+        <p class="tagline">Experiments, tools, and projects by Owen.</p>
+
+        <div class="hero-buttons">
+            <a href="#projects" class="btn primary">View Projects</a>
+            <a href="#about" class="btn ghost">About Me</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="cards">
+            <article class="card">
+                <h3>Local LLM Chat</h3>
+                <p>
+                    A local AI chat interface with a custom UI, memory, and tools.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>More Coming Soon</h3>
+                <p>
+                    This is just the start. New experiments will show up here over time.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About</h2>
+        <p>
+            Hi, I’m Owen. I like building custom tools, UIs, and experiments —
+            from local AI chat apps to desktop utilities and themed experiences.
+        </p>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>
+            You can reach me via my GitHub profile:
+            <a href="https://github.com/omueller5" target="_blank">github.com/omueller5</a>
+        </p>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© <span id="year"></span> Owen Runtime. All rights reserved.</p>
+</footer>
+
+<!-- Optional JS file -->
+<script src="script.js"></script>
 </body>
 </html>
