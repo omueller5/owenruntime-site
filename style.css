@@ -175,24 +175,23 @@ a.card {
 /* =========================================================
    Buttons (Shared)
    ========================================================= */
+
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.55rem 1.1rem;
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid transparent;
-    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease,
+    background 0.1s ease, color 0.1s ease;
 }
 
 .btn.primary {
     background: #ff4b8b;
-    border-color: #ff4b8b;
-    color: #ffffff;
+    color: #fff;
     box-shadow: 0 0 18px #ff4b8b44;
+    border: none;
 }
 
 .btn.primary:hover {
@@ -201,13 +200,13 @@ a.card {
 }
 
 .btn.ghost {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: transparent;
+    border: 1px solid #44485f;
     color: #e0e3ff;
+    background: transparent;
 }
 
 .btn.ghost:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: #161827;
 }
 
 /* =========================================================
@@ -250,6 +249,8 @@ a.card {
 
 .shot img {
     width: 100%;
+    height: 160px;        /* keeps them small on the page */
+    object-fit: cover;    /* crops nicely instead of stretching */
     border-radius: 8px;
     margin-bottom: 0.5rem;
     cursor: pointer;
@@ -257,7 +258,7 @@ a.card {
 }
 
 .shot img:hover {
-    transform: scale(1.03);
+    transform: scale(1.06); /* bigger on hover */
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
