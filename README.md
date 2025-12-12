@@ -17,9 +17,25 @@ Owen Lab is my personal dev workshop where I share:
 - UI / UX experiments  
 - Desktop and web tools  
 - Local AI and automation projects  
-- Ongoing technical experiments
+- Ongoing technical experiments  
+- **Minecraft: Java Edition mods**
 
 The goal is to keep everything lightweight, fast, and easy to explore in a browser.
+
+---
+
+## ⛏️ Minecraft Modding
+
+I also develop mods for **Minecraft: Java Edition**, primarily using the  
+**Fabric** mod loader and targeting modern Minecraft versions.
+
+These mods focus on:
+- New blocks, items, tools, and armor  
+- Custom crafting systems and gameplay mechanics  
+- Themed content and experimental features  
+
+Mods are showcased directly on the site with screenshots, feature summaries,
+and links to source code or release pages when available.
 
 ---
 
@@ -27,36 +43,23 @@ The goal is to keep everything lightweight, fast, and easy to explore in a brows
 
 This site is built using simple, reliable web tech:
 
-- **HTML** – structure
-- **CSS** – styling
-- **JavaScript** – interactivity (when needed)
-- **GitHub Pages** – hosting
-- **Cloudflare** – DNS & domain management
+- **HTML** – structure  
+- **CSS** – styling  
+- **JavaScript** – interactivity (when needed)  
+- **GitHub Pages** – hosting  
+- **Cloudflare** – DNS & domain management  
 
 No backend required — everything runs client-side.
 
-## 📁 Project Structure
-```
-├── .gitignore  
-├── CNAME  
-├── index.html  
-├── script.js  
-├── style.css  
-│  
-└── assets/  
-    ├── icons/  
-    └── images/
+---
 
-This repo only contains what’s needed to run the live website.  
-IDE files (like `.idea/`) are intentionally excluded.
-```
 ## 🚀 Deployment
 
 The site is deployed automatically using **GitHub Pages**:
 
-1. Code is pushed to the `main` branch
-2. GitHub builds and deploys the site
-3. The custom domain `owenlab.dev` points to the live version via Cloudflare
+1. Code is pushed to the `main` branch  
+2. GitHub builds and deploys the site  
+3. The custom domain `owenlab.dev` points to the live version via Cloudflare  
 
 No manual server management is required.
 
@@ -68,8 +71,9 @@ Owen Lab exists as:
 
 - A public portfolio  
 - A place to document experiments  
-- A launch page for future tools  
-- A personal learning log
+- A showcase for Minecraft mods and tools  
+- A launch page for future projects  
+- A personal learning log  
 
 Content will grow and evolve over time as new projects are added.
 
