@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owen Lab – Mods</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="top-nav">
+    <div class="nav-left">
+        <a href="index.html" class="brand">Owen Lab</a>
+    </div>
+    <nav class="nav-links">
+        <a href="index.html" class="nav-btn">Overview</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="mods.html" class="nav-btn active">Mods</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Page intro -->
+    <section class="section">
+        <h1>Minecraft Mods</h1>
+        <p>
+            This page is for my <strong>Minecraft: Java Edition</strong> mods,
+            built using the <strong>Fabric</strong> mod loader for versions
+            <strong>1.20.4 and above</strong>. As I update old projects and
+            create new ones, they’ll be listed here with screenshots and links.
+        </p>
+    </section>
+
+    <!-- Featured mod block: HalaMusic -->
+    <section class="section project-block">
+        <div class="project-header">
+            <h2>HalaMusic (Fabric Mod)</h2>
+            <p>
+                A Fabric mod for <strong>Minecraft: Java Edition</strong> that adds ruby ore and blocks,
+                ruby tools and armor, a custom Gem Polishing Station, and several custom music discs
+                inspired by the artist <strong>HalaCG</strong>.
+            </p>
+
+            <p style="margin-top: 0.75rem;">
+                <strong>Modrinth:</strong>
+                <a href="https://modrinth.com/mod/halacg-music" target="_blank" rel="noopener">
+                    modrinth.com/mod/halacg-music
+                </a>
+                <br />
+                <strong>Source:</strong>
+                <a href="https://github.com/omueller5/halamusic" target="_blank" rel="noopener">
+                    github.com/omueller5/halamusic
+                </a>
+            </p>
+
+            <p style="margin-top: 0.75rem; opacity: 0.9;">
+                <strong>Music credit:</strong> All music is owned and copyrighted by <strong>HalaCG</strong>.
+                Please support the original artist:
+                <a href="https://www.youtube.com/channel/UCFbfFv3bjWctmO2IQoHLiHg" target="_blank" rel="noopener">YouTube</a>
+                •
+                <a href="https://open.spotify.com/artist/0Tbadays3Z2K3BxmvjL34J" target="_blank" rel="noopener">Spotify</a>
+            </p>
+
+            <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="pill">Fabric</span>
+                <span class="pill">1.20.4+</span>
+                <span class="pill">Ruby Ore</span>
+                <span class="pill">Tools & Armor</span>
+                <span class="pill">Music Discs</span>
+            </div>
+        </div>
+
+        <!-- Screenshot gallery for HalaMusic -->
+        <div class="project-gallery">
+            <figure class="shot">
+                <img src="assets/images/MC2.png"
+                     alt="Player wearing ruby armor added by HalaMusic" />
+                <figcaption>Ruby armor set</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="assets/images/MC1.png"
+                     alt="Items and blocks added by the HalaMusic mod" />
+                <figcaption>Items & blocks</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="assets/images/MC3.png"
+                     alt="Gem Polishing Station crafting block from HalaMusic" />
+                <figcaption>Gem Polishing Station</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- Placeholder for future mods -->
+    <section class="section project-block muted">
+        <div class="project-header">
+            <h2>More Mods Coming Soon</h2>
+            <p>
+                As I create or update more Fabric mods for newer Minecraft
+                versions, they’ll appear here with their own sections,
+                setup notes, and screenshots.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© <span id="year"></span> Owen Lab. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

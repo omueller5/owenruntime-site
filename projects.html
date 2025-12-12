@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owen Lab – Projects</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="top-nav">
+    <div class="nav-left">
+        <a href="index.html" class="brand">Owen Lab</a>
+    </div>
+    <nav class="nav-links">
+        <a href="index.html" class="nav-btn">Overview</a>
+        <a href="projects.html" class="nav-btn active">Projects</a>
+        <a href="mods.html" class="nav-btn">Mods</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Page intro -->
+    <section class="section">
+        <h1>Projects</h1>
+        <p>
+            Here are some of the things I’m working on. Each project card
+            has screenshots and a short description. Right now the main
+            focus is my Local LLM Chat (Mochi) project, with more to come.
+        </p>
+    </section>
+
+    <!-- Local LLM Chat / Mochi project block -->
+    <section class="section project-block">
+        <div class="project-header">
+            <h2>Local LLM Chat (Mochi)</h2>
+            <p>
+                A local AI chat interface with a custom UI, memory,
+                and tools. Designed to feel responsive, themed, and
+                comfortable to use for long sessions.
+            </p>
+        </div>
+
+        <div class="project-gallery">
+            <!-- Screenshot 1 -->
+            <figure class="shot">
+                <img src="assets/images/LLM1.png"
+                     alt="Mochi chat UI main window" />
+                <figcaption>Main chat view</figcaption>
+            </figure>
+
+            <!-- Screenshot 2 -->
+            <figure class="shot">
+                <img src="assets/images/LLM2.png"
+                     alt="Conversation with Mochi showing responses" />
+                <figcaption>Conversation in progress</figcaption>
+            </figure>
+
+            <!-- Screenshot 3 -->
+            <figure class="shot">
+                <img src="assets/images/LLM3.png"
+                     alt="Settings or controls for Mochi chat" />
+                <figcaption>Settings / controls</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section project-block">
+        ...
+    </section>
+
+    <!-- Placeholder for future projects -->
+    <section class="section project-block muted">
+        <div class="project-header">
+            <h2>More Projects Coming Soon</h2>
+            <p>
+                As I build additional tools and experiments, they’ll
+                appear here with their own screenshots and details.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© <span id="year"></span> Owen Lab. All rights reserved.</p>
+</footer>
+<!-- Lightbox overlay for enlarged screenshots -->
+<div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-inner">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <img id="lightboxImage" src="" alt="Enlarged project screenshot" />
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
