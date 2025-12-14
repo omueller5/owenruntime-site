@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Bladebound – Owen Lab</title>
+
+    <!-- IMPORTANT: your site uses style.css (not styles.css) -->
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+<header class="top-nav">
+    <div class="nav-left">
+        <a href="../index.html" class="brand">Owen Lab</a>
+    </div>
+
+    <nav class="nav-links">
+        <a href="../index.html" class="nav-btn">Overview</a>
+        <a href="../projects.html" class="nav-btn">Projects</a>
+        <a href="../mods.html" class="nav-btn active">Mods</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Intro / hero -->
+    <section class="section project-block">
+        <div class="project-header">
+            <h1 style="font-size: 2rem; margin-bottom: 0.75rem;">Bladebound</h1>
+            <p>
+                Legendary blades, shrine discovery, and progression built for survival worlds.
+                Explore naturally, discover shrines, and commit to mastering your blade.
+            </p>
+
+            <p style="margin-top: 0.75rem;">
+                <strong>Modrinth:</strong>
+                <a href="https://modrinth.com/project/bladebound" target="_blank" rel="noopener">
+                    modrinth.com/project/bladebound
+                </a>
+            </p>
+
+            <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="pill">Fabric</span>
+                <span class="pill">1.20.4+</span>
+                <span class="pill">Worldgen</span>
+                <span class="pill">Progression</span>
+                <span class="pill">Legendary Swords</span>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <a class="btn primary" href="https://modrinth.com/project/bladebound" target="_blank" rel="noopener">
+                    View on Modrinth
+                </a>
+                <a class="btn ghost" href="#shrines">
+                    See Shrines
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shrines -->
+    <section class="section project-block" id="shrines">
+        <div class="project-header">
+            <h2>Blade Shrines</h2>
+            <p>
+                Shrines generate in specific places across the world — keep exploring and you’ll find them.
+            </p>
+        </div>
+
+        <div class="project-gallery">
+            <figure class="shot">
+                <img src="../assets/images/shrine-1.png" alt="Bladebound shrine screenshot 1" loading="lazy" />
+                <figcaption>Excalibur Shrine</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="../assets/images/shrine-2.png" alt="Bladebound shrine screenshot 2" loading="lazy" />
+                <figcaption>Wado Shrine</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="../assets/images/shrine-3.png" alt="Bladebound shrine screenshot 3" loading="lazy" />
+                <figcaption>Muramase Shrine</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- How to play -->
+    <section class="section project-block">
+        <div class="project-header">
+            <h2>How to Play</h2>
+            <p>
+                Bladebound is designed to feel natural in survival — no weird setup, just exploration and commitment.
+            </p>
+        </div>
+
+        <div class="project-gallery">
+            <div class="shot" style="padding: 1rem;">
+                <h3 style="margin-bottom: 0.35rem;">1) Explore</h3>
+                <p style="color: #c0c3d7;">
+                    Travel and look for shrine structures — they’re meant to be discovered naturally.
+                </p>
+            </div>
+
+            <div class="shot" style="padding: 1rem;">
+                <h3 style="margin-bottom: 0.35rem;">2) Claim a Blade</h3>
+                <p style="color: #c0c3d7;">
+                    Each blade has its own identity and strengths. Keep it safe.
+                </p>
+            </div>
+
+            <div class="shot" style="padding: 1rem;">
+                <h3 style="margin-bottom: 0.35rem;">3) Progress</h3>
+                <p style="color: #c0c3d7;">
+                    Mastery and effects reward long-term use and commitment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credits -->
+    <section class="section project-block muted">
+        <div class="project-header">
+            <h2>Credits</h2>
+            <p>
+                🔖 Credits<br />
+                Made by Owen / Bladebound<br />
+                Minecraft is © Mojang AB.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© <span id="year"></span> Owen Lab. All rights reserved.</p>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

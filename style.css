@@ -175,7 +175,6 @@ a.card {
 /* =========================================================
    Buttons (Shared)
    ========================================================= */
-
 .btn {
     display: inline-block;
     padding: 0.7rem 1.6rem;
@@ -231,7 +230,7 @@ a.card {
     max-width: 60rem;
 }
 
-/* Screenshot gallery */
+/* Screenshot gallery (used on mods/projects pages) */
 .project-gallery {
     margin-top: 1.5rem;
     display: grid;
@@ -249,8 +248,8 @@ a.card {
 
 .shot img {
     width: 100%;
-    height: 160px;        /* keeps them small on the page */
-    object-fit: cover;    /* crops nicely instead of stretching */
+    height: 160px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 0.5rem;
     cursor: pointer;
@@ -258,7 +257,7 @@ a.card {
 }
 
 .shot img:hover {
-    transform: scale(1.06); /* bigger on hover */
+    transform: scale(1.06);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -292,6 +291,208 @@ a.card {
     .mod-layout {
         grid-template-columns: 1fr;
     }
+}
+
+/* =========================================================
+   Bladebound Page Helpers (safe: uses unique class names)
+   ========================================================= */
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.hero {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+    padding: 1.25rem;
+    border: 1px solid #222435;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+}
+
+.title {
+    font-size: 2.2rem;
+    letter-spacing: 0.2px;
+}
+
+.subtitle {
+    margin-top: 0.35rem;
+    opacity: 0.9;
+}
+
+.cta-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Dedicated button classes so they don't override .btn */
+.btn2 {
+    display: inline-block;
+    padding: 0.65rem 0.95rem;
+    border-radius: 12px;
+    background: #ff76a6;
+    color: #050509;
+    font-weight: 650;
+    text-decoration: none;
+    transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.btn2:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+}
+
+.btn2-outline {
+    background: transparent;
+    color: #ff76a6;
+    border: 1px solid #ff76a6;
+}
+
+.btn2-outline:hover {
+    background: rgba(255, 118, 166, 0.08);
+}
+
+.hero-card {
+    border: 1px solid #222435;
+    border-radius: 16px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.bullets {
+    margin-top: 0.5rem;
+    padding-left: 1.1rem;
+}
+
+.bullets li {
+    margin: 0.35rem 0;
+}
+
+/* Bladebound page gallery (different class from project-gallery) */
+.gallery {
+    margin-top: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+
+.shot2 {
+    border: 1px solid #222435;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.shot2 img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+}
+
+.shot2 figcaption {
+    padding: 0.75rem 0.8rem;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    border-top: 1px solid #222435;
+}
+
+/* =========================================================
+   Bladebound overview card (if you use it anywhere)
+   ========================================================= */
+.mod-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.1rem;
+    border-radius: 16px;
+    border: 1px solid #222435;
+    background: rgba(255, 255, 255, 0.02);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.mod-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(255, 118, 166, 0.25);
+}
+
+.mod-card.featured {
+    border-color: rgba(255, 118, 166, 0.6);
+}
+
+.mod-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mod-card-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.mod-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(255, 118, 166, 0.15);
+    color: #ff76a6;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.mod-desc {
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.mod-features {
+    margin: 0.3rem 0 0;
+    padding-left: 1.1rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.mod-features li {
+    margin: 0.25rem 0;
+}
+
+.mod-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view-more {
+    font-size: 0.85rem;
+    color: #ff76a6;
+    font-weight: 650;
 }
 
 /* =========================================================
