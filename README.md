@@ -18,15 +18,16 @@ Owen Lab is my personal dev workshop where I share:
 - Desktop and web tools  
 - Local AI and automation projects  
 - Ongoing technical experiments  
-- **Minecraft: Java Edition mods**
+- **Minecraft: Java Edition mods**  
+- **Minecraft: Bedrock Edition addons**
 
 The goal is to keep everything lightweight, fast, and easy to explore in a browser.
 
 ---
 
-## ⛏️ Minecraft Modding
+## ⛏️ Minecraft Modding (Java Edition)
 
-I also develop mods for **Minecraft: Java Edition**, primarily using the  
+I develop mods for **Minecraft: Java Edition**, primarily using the  
 **Fabric** mod loader and targeting modern Minecraft versions.
 
 These mods focus on:
@@ -36,6 +37,21 @@ These mods focus on:
 
 Mods are showcased directly on the site with screenshots, feature summaries,
 and links to source code or release pages when available.
+
+---
+
+## 🧩 Minecraft Addons (Bedrock Edition)
+
+I also create **Minecraft: Bedrock Edition addons**, designed to be lightweight,
+compatible with recent game updates, and easy to install.
+
+These addons typically focus on:
+- Quality-of-life improvements  
+- Gameplay tweaks and utility features  
+- Experimental mechanics built using Bedrock’s addon system  
+
+Addons are listed on the site with descriptions, images, and download links
+when available.
 
 ---
 
@@ -71,11 +87,11 @@ Owen Lab exists as:
 
 - A public portfolio  
 - A place to document experiments  
-- A showcase for Minecraft mods and tools  
-- A launch page for future projects  
+- A showcase for projects, mods, and addons  
+- A launch page for future tools  
 - A personal learning log  
 
-Content will grow and evolve over time as new projects are added.
+Content will grow and evolve over time as new work is added.
 
 ---
 
