@@ -127,6 +127,7 @@ a:hover {
     gap: 1.5rem;
 }
 
+/* Card base (shared) */
 .card {
     background: #101221;
     border-radius: 12px;
@@ -182,8 +183,11 @@ a.card {
     font-size: 0.95rem;
     text-decoration: none;
     cursor: pointer;
-    transition: transform 0.1s ease, box-shadow 0.1s ease,
-    background 0.1s ease, color 0.1s ease;
+    transition:
+            transform 0.1s ease,
+            box-shadow 0.1s ease,
+            background 0.1s ease,
+            color 0.1s ease;
 }
 
 .btn.primary {
@@ -294,7 +298,7 @@ a.card {
 }
 
 /* =========================================================
-   Bladebound Page Helpers (safe: uses unique class names)
+   Page Container (used by multiple pages)
    ========================================================= */
 .page {
     max-width: 1100px;
@@ -302,6 +306,9 @@ a.card {
     padding: 2rem 1.5rem;
 }
 
+/* =========================================================
+   Bladebound Page Helpers (safe: uses unique class names)
+   ========================================================= */
 .hero {
     display: grid;
     gap: 1.25rem;
@@ -550,4 +557,140 @@ a.card {
     border-top: 1px solid #222435;
     font-size: 0.85rem;
     color: #8689a1;
+}
+
+/* =========================================================
+   Addons Page (scoped, so it won't affect other pages)
+   Requires: <body class="addons-page">
+   ========================================================= */
+.addons-page .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+}
+
+.addons-page .page-header h1 {
+    margin: 0 0 6px;
+    font-size: 2rem;
+}
+
+.addons-page .sub {
+    margin: 0 0 22px;
+    opacity: 0.85;
+    line-height: 1.5;
+}
+
+.addons-page .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
+}
+
+.addons-page .card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+}
+
+.addons-page .card-top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.addons-page .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+.addons-page .titleblock h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.addons-page .meta {
+    margin: 2px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.75;
+}
+
+.addons-page .desc {
+    margin: 14px 0 12px;
+    line-height: 1.55;
+    opacity: 0.92;
+}
+
+.addons-page .demo {
+    width: 100%;
+    border-radius: 12px;
+    margin: 10px 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.20);
+    display: block;
+}
+
+/* Optional: keep big GIFs from taking over large screens */
+@media (min-width: 700px) {
+    .addons-page .demo {
+        max-height: 260px;
+        object-fit: cover;
+    }
+}
+
+.addons-page .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+}
+
+.addons-page .chip {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.92;
+}
+
+.addons-page .links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* scoped button styling for the addons page (so it doesn't override shared .btn) */
+.addons-page .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.10);
+    color: inherit;
+}
+
+.addons-page .btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.addons-page .btn.ghost {
+    background: transparent;
+}
+
+.addons-page .hero {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 1.25rem;
 }
