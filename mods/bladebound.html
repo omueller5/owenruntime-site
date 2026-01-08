@@ -43,8 +43,11 @@
             </p>
 
             <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <!-- Auto-updated from Modrinth -->
+                <span class="pill" id="bb-mod-version">Mod Version: v1.2.3</span>
+
                 <span class="pill">Fabric</span>
-                <span class="pill">1.20.4+</span>
+                <span class="pill">1.21.1</span>
                 <span class="pill">Worldgen</span>
                 <span class="pill">Progression</span>
                 <span class="pill">Legendary Swords</span>
@@ -82,6 +85,12 @@
                 <img src="../assets/images/mods/shrine-3.png" alt="Bladebound shrine screenshot 3" loading="lazy" />
                 <figcaption>Muramase Shrine</figcaption>
             </figure>
+
+            <!-- Frieren Shrine -->
+            <figure class="shot">
+                <img src="../assets/images/mods/shrine-4.png" alt="Frieren shrine screenshot" loading="lazy" />
+                <figcaption>Frieren Shrine</figcaption>
+            </figure>
         </div>
     </section>
 
@@ -94,10 +103,9 @@
         </div>
 
         <div class="project-gallery">
-            <!-- Replace filenames to match your exact screenshot names (hyphens, no underscores) -->
             <figure class="shot">
                 <img src="../assets/images/mods/sandai-kitetsu.png" alt="Sandai Kitetsu" loading="lazy" />
-                <figcaption>Wado Ichimonji</figcaption>
+                <figcaption>Sandai Kitetsu</figcaption>
             </figure>
 
             <figure class="shot">
@@ -105,27 +113,23 @@
                 <figcaption>Wado Ichimonji</figcaption>
             </figure>
 
-
             <figure class="shot">
                 <img src="../assets/images/mods/murasame.png" alt="Murasame" loading="lazy" />
                 <figcaption>Murasame</figcaption>
             </figure>
-
 
             <figure class="shot">
                 <img src="../assets/images/mods/excalibur.png" alt="Excalibur" loading="lazy" />
                 <figcaption>Excalibur</figcaption>
             </figure>
 
-            <!-- Add more swords like this:
+            <!-- Frieren Item -->
             <figure class="shot">
-                <img src="../images/<sword-name>.png" alt="<Sword Name>" loading="lazy" />
-                <figcaption><Sword Name></figcaption>
+                <img src="../assets/images/mods/frieren.png" alt="Frieren Item" loading="lazy" />
+                <figcaption>Frieren</figcaption>
             </figure>
-            -->
         </div>
     </section>
-
 
     <!-- How to play -->
     <section class="section project-block">
@@ -178,7 +182,49 @@
 </footer>
 
 <script>
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Auto-load latest Modrinth version
+    async function loadBladeboundModrinthVersion() {
+        const pill = document.getElementById("bb-mod-version");
+        if (!pill) return;
+
+        const projectSlug = "bladebound";
+
+        try {
+            const url = new URL(`https://api.modrinth.com/v2/project/${projectSlug}/version`);
+
+            // Optional strict filters (enable if you ever want them)
+            // url.searchParams.set("loaders", JSON.stringify(["fabric"]));
+            // url.searchParams.set("game_versions", JSON.stringify(["1.21.1"]));
+
+            const res = await fetch(url.toString(), {
+                headers: { "Accept": "application/json" }
+            });
+
+            if (!res.ok) throw new Error("Modrinth API error");
+
+            const versions = await res.json();
+            if (!Array.isArray(versions) || versions.length === 0) return;
+
+            // Prefer release builds
+            const releases = versions.filter(v => v.version_type === "release");
+            const list = releases.length ? releases : versions;
+
+            list.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
+            const latest = list[0];
+
+            const versionText = latest?.version_number || latest?.name;
+            if (versionText) {
+                pill.textContent = `Mod Version: ${versionText}`;
+            }
+        } catch (err) {
+            // Leave fallback text if offline / API blocked / rate-limited
+        }
+    }
+
+    loadBladeboundModrinthVersion();
 </script>
 </body>
 </html>
