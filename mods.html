@@ -63,6 +63,10 @@
                 <a href="https://open.spotify.com/artist/0Tbadays3Z2K3BxmvjL34J" target="_blank" rel="noopener">Spotify</a>
             </p>
 
+            <!-- Auto pills for HalaMusic -->
+            <span class="pill" id="hm-mod-version">Mod Version: …</span>
+            <span class="pill" id="hm-total-downloads">Downloads: …</span>
+
             <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="pill">Fabric</span>
                 <span class="pill">1.20.4+</span>
@@ -116,6 +120,9 @@
                 </a>
             </p>
 
+            <span class="pill" id="bb-mod-version">Mod Version: …</span>
+            <span class="pill" id="bb-total-downloads">Total Downloads: …</span>
+
             <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <span class="pill">Fabric</span>
                 <span class="pill">1.21.1</span>
@@ -125,7 +132,7 @@
             </div>
         </div>
 
-        <!-- Bladebound gallery (swap these image paths to your shrine screenshots) -->
+        <!-- Bladebound gallery -->
         <div class="project-gallery">
             <figure class="shot">
                 <img src="assets/images/mods/shrine-1.png"
@@ -165,5 +172,154 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+    // =========================================================
+    // Footer year
+    // =========================================================
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // =========================================================
+    // Helpers
+    // =========================================================
+    function formatCount(n) {
+        if (!Number.isFinite(n)) return "…";
+        return Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(n);
+    }
+
+    // =========================================================
+    // Modrinth: latest version + downloads
+    // =========================================================
+    async function getModrinthDownloads(projectSlugOrId) {
+        const res = await fetch(`https://api.modrinth.com/v2/project/${projectSlugOrId}`, {
+            headers: { "Accept": "application/json" }
+        });
+        if (!res.ok) throw new Error("Modrinth project API error");
+        const data = await res.json();
+        return Number(data?.downloads) || 0;
+    }
+
+    async function getModrinthLatestVersion(projectSlugOrId) {
+        const url = new URL(`https://api.modrinth.com/v2/project/${projectSlugOrId}/version`);
+        const res = await fetch(url.toString(), { headers: { "Accept": "application/json" } });
+        if (!res.ok) throw new Error("Modrinth version API error");
+
+        const versions = await res.json();
+        if (!Array.isArray(versions) || versions.length === 0) return null;
+
+        const releases = versions.filter(v => v && v.version_type === "release");
+        const list = releases.length ? releases : versions;
+
+        list.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
+        const latest = list[0];
+        return latest?.version_number || latest?.name || null;
+    }
+
+    async function setModrinthPills({ project, versionPillId, downloadsPillId, downloadsLabel }) {
+        const vEl = document.getElementById(versionPillId);
+        const dEl = document.getElementById(downloadsPillId);
+
+        try {
+            const [ver, dl] = await Promise.all([
+                getModrinthLatestVersion(project),
+                getModrinthDownloads(project)
+            ]);
+
+            if (vEl && ver) vEl.textContent = `Mod Version: ${ver}`;
+            if (dEl) dEl.textContent = `${downloadsLabel}: ${formatCount(dl)}`;
+        } catch (e) {
+            // Leave fallbacks if anything fails
+        }
+    }
+
+    // =========================================================
+    // CurseForge via CFWidget: Bladebound downloads (to sum with Modrinth)
+    // =========================================================
+    async function fetchCFWidget(path, retries = 7, delayMs = 650) {
+        const url = `https://api.cfwidget.com/${path}`;
+
+        for (let i = 0; i <= retries; i++) {
+            const res = await fetch(url, { headers: { "Accept": "application/json" } });
+
+            // 202 = queued/not ready yet (retry)
+            if (res.status === 202) {
+                if (i === retries) throw new Error("CFWidget queued too long");
+                await new Promise(r => setTimeout(r, delayMs));
+                continue;
+            }
+
+            if (!res.ok) throw new Error(`CFWidget error ${res.status}`);
+            return await res.json();
+        }
+
+        throw new Error("CFWidget fetch failed");
+    }
+
+    function extractTotalDownloads(data) {
+        const d = data && data.downloads ? data.downloads : null;
+        if (!d) return NaN;
+
+        const candidates = [
+            d.total,
+            d.totalDownloads,
+            d.downloads,
+            d.all_time,
+            d.allTime
+        ];
+
+        for (const v of candidates) {
+            const num = Number(v);
+            if (Number.isFinite(num)) return num;
+        }
+
+        return NaN;
+    }
+
+    async function setBladeboundTotalDownloads() {
+        const pill = document.getElementById("bb-total-downloads");
+        if (!pill) return;
+
+        const mrProject = "bladebound";
+        const cfPath = "minecraft/mc-mods/bladebound"; // from https://www.curseforge.com/minecraft/mc-mods/bladebound
+
+        try {
+            const [mr, cfData] = await Promise.all([
+                getModrinthDownloads(mrProject),
+                fetchCFWidget(cfPath)
+            ]);
+
+            const cf = extractTotalDownloads(cfData);
+            const total = mr + (Number.isFinite(cf) ? cf : 0);
+
+            pill.textContent = `Total Downloads: ${formatCount(total)}`;
+        } catch (e) {
+            // Leave fallback if anything fails
+        }
+    }
+
+    // =========================================================
+    // Run
+    // =========================================================
+
+    // HalaMusic (Modrinth-only)
+    setModrinthPills({
+        project: "halacg-music",
+        versionPillId: "hm-mod-version",
+        downloadsPillId: "hm-total-downloads",
+        downloadsLabel: "Downloads"
+    });
+
+    // Bladebound: version from Modrinth
+    setModrinthPills({
+        project: "bladebound",
+        versionPillId: "bb-mod-version",
+        downloadsPillId: "bb-total-downloads", // will be overwritten by total (MR+CF) below
+        downloadsLabel: "Downloads"
+    });
+
+    // Bladebound: total downloads (Modrinth + CurseForge)
+    setBladeboundTotalDownloads();
+</script>
 </body>
 </html>

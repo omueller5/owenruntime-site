@@ -62,6 +62,7 @@
                 <span class="chip">Survival-Friendly</span>
                 <span class="chip">Multiplayer-Safe</span>
                 <span class="chip">No Commands</span>
+                <span class="pill" id="of-total-downloads">Downloads: …</span>
             </div>
 
             <div class="links">
@@ -96,6 +97,7 @@
                 <span class="chip">Survival-Friendly</span>
                 <span class="chip">Multiplayer-Safe</span>
                 <span class="chip">No Commands</span>
+                <span class="pill" id="tf-total-downloads">Downloads: …</span>
             </div>
 
             <div class="links">
@@ -122,6 +124,7 @@
                 <span class="chip">Survival-Friendly</span>
                 <span class="chip">Multiplayer-Safe</span>
                 <span class="chip">No Commands</span>
+                <span class="pill" id="fld-total-downloads">Downloads: …</span>
             </div>
 
             <div class="links">
@@ -137,5 +140,84 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+    // =========================================================
+    // CurseForge download pills (CFWidget JSON API)
+    // =========================================================
+    // Uses your CurseForge "path" (minecraft-bedrock/addons/<slug>).
+    // CFWidget can respond 202 while it queues the project; we retry a few times.
+    // =========================================================
+
+    function formatDownloads(n) {
+        if (!Number.isFinite(n)) return "…";
+        return Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(n);
+    }
+
+    async function fetchCFWidget(path, retries = 7, delayMs = 650) {
+        const url = `https://api.cfwidget.com/${path}`;
+
+        for (let i = 0; i <= retries; i++) {
+            const res = await fetch(url, { headers: { "Accept": "application/json" } });
+
+            // 202 = queued/not ready yet (retry)
+            if (res.status === 202) {
+                if (i === retries) throw new Error("CFWidget queued too long");
+                await new Promise(r => setTimeout(r, delayMs));
+                continue;
+            }
+
+            if (!res.ok) throw new Error(`CFWidget error ${res.status}`);
+
+            return await res.json();
+        }
+
+        throw new Error("CFWidget fetch failed");
+    }
+
+    function extractTotalDownloads(data) {
+        // Be defensive: different payloads may vary.
+        // Prefer a "total" if present; otherwise try common keys.
+        const d = data && data.downloads ? data.downloads : null;
+        if (!d) return NaN;
+
+        const candidates = [
+            d.total,
+            d.totalDownloads,
+            d.downloads,
+            d.all_time,
+            d.allTime
+        ];
+
+        for (const v of candidates) {
+            const num = Number(v);
+            if (Number.isFinite(num)) return num;
+        }
+
+        return NaN;
+    }
+
+    async function setDownloads(pillId, cfPath) {
+        const pill = document.getElementById(pillId);
+        if (!pill) return;
+
+        try {
+            const data = await fetchCFWidget(cfPath);
+            const total = extractTotalDownloads(data);
+
+            if (Number.isFinite(total)) {
+                pill.textContent = `Downloads: ${formatDownloads(total)}`;
+            }
+        } catch (e) {
+            // Leave fallback "Downloads: …" if anything fails.
+        }
+    }
+
+    // Your CurseForge links (non-legacy) map perfectly to these paths:
+    // https://www.curseforge.com/minecraft-bedrock/addons/<slug>
+    setDownloads("of-total-downloads", "minecraft-bedrock/addons/orefeller");
+    setDownloads("tf-total-downloads", "minecraft-bedrock/addons/treefeller");
+    setDownloads("fld-total-downloads", "minecraft-bedrock/addons/fastleafdecay");
+</script>
 </body>
 </html>
