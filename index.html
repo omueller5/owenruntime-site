@@ -31,53 +31,77 @@
             Hi, I’m Owen. I work on a mix of creative and technical projects, including
             Minecraft mods for the Fabric mod loader on Java Edition and add-ons for
             Minecraft: Bedrock Edition. I enjoy designing gameplay systems, mechanics,
-            and quality-of-life features, alongside building custom tools and other
-            experimental projects.
+            and quality-of-life features, alongside building custom tools, automation,
+            and experimental projects.
         </p>
     </section>
 
     <section id="overview" class="section">
         <h2>Overview</h2>
         <p>
-            Here’s a quick look at some of the things I’m working on. Right now the
-            main focus is my Local LLM Chat project, with Minecraft projects and
-            new experiments planned over time.
+            Here’s a quick look at some of the things I’m working on. Most of my time is
+            currently focused on Minecraft projects (especially Bladebound), while I
+            also build automation tools and smaller side projects as I go.
         </p>
-<br>
+        <br>
+
         <div class="cards">
-            <!-- Projects highlight -->
-            <a class="card mod-card" href="projects.html">
+            <!-- Projects highlight (Endfield Bot) -->
+            <a class="card mod-card" href="projects.html#game-bots">
                 <div class="card-label">Projects</div>
-                <h3>Local LLM Chat</h3>
+                <h3>Endfield Discord Bot</h3>
+
+                <div class="project-tags">
+                    <span class="pill">Discord Bot</span>
+                    <span class="pill">Automation Tool</span>
+                    <span class="pill status-dev">In Development</span>
+                </div>
+
                 <p>
-                    A local AI chat interface with a custom UI, memory, and tools.
+                    A game-specific Discord bot for Arknights: Endfield that auto-posts
+                    official news (with excerpts), handles tweets correctly, and provides
+                    an /endfield command.
                 </p>
                 <span class="card-cta">View project →</span>
             </a>
 
-            <!-- Mods highlight -->
+            <!-- Mods highlight (Bladebound) -->
             <a class="card mod-card" href="mods.html">
                 <div class="card-label">Mods</div>
                 <h3>Bladebound</h3>
+
+                <div class="project-tags">
+                    <span class="pill" id="bb-mod-version">Mod Version: …</span>
+                    <span class="pill" id="bb-total-downloads">Total Downloads: …</span>
+                    <span class="pill">Fabric</span>
+                </div>
+
                 <p>
-                    Fabric mod for Minecraft 1.21+ featuring legendary swords, structures,
-                    progression, and custom gameplay systems.
+                    A Fabric mod for Minecraft 1.21+ featuring legendary swords, structures,
+                    progression systems, and large-scale world generation.
                 </p>
                 <span class="card-cta">View mods →</span>
             </a>
 
-            <!-- Addons highlight -->
+            <!-- Addons highlight (OreFeller) -->
             <a class="card mod-card" href="addons.html">
                 <div class="card-label">Addons</div>
                 <h3>OreFeller</h3>
+
+                <div class="project-tags">
+                    <span class="pill">Survival-Friendly</span>
+                    <span class="pill">Multiplayer-Safe</span>
+                    <span class="pill" id="of-total-downloads">Downloads: …</span>
+                </div>
+
                 <p>
-                    Bedrock utility addon that mines all connected ore blocks when you break one.
+                    A Bedrock utility addon that instantly mines all connected ore blocks
+                    when one is broken, without commands or configuration.
                 </p>
                 <span class="card-cta">View addons →</span>
             </a>
         </div>
     </section>
-
 
     <section id="contact" class="section">
         <h2>Contact</h2>
@@ -99,5 +123,162 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+    // =========================================================
+    // Index pills: Bladebound version + total downloads, OreFeller downloads
+    // =========================================================
+
+    // Footer year (safe if script.js already does it)
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    function formatCount(n) {
+        if (!Number.isFinite(n)) return "…";
+        return Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(n);
+    }
+
+    // -------------------------
+    // Modrinth
+    // -------------------------
+    async function getModrinthDownloads(projectSlugOrId) {
+        const res = await fetch(`https://api.modrinth.com/v2/project/${projectSlugOrId}`, {
+            headers: { "Accept": "application/json" }
+        });
+        if (!res.ok) throw new Error("Modrinth project API error");
+        const data = await res.json();
+        return Number(data?.downloads) || 0;
+    }
+
+    async function getModrinthLatestVersion(projectSlugOrId) {
+        const res = await fetch(`https://api.modrinth.com/v2/project/${projectSlugOrId}/version`, {
+            headers: { "Accept": "application/json" }
+        });
+        if (!res.ok) throw new Error("Modrinth version API error");
+
+        const versions = await res.json();
+        if (!Array.isArray(versions) || versions.length === 0) return null;
+
+        const releases = versions.filter(v => v && v.version_type === "release");
+        const list = releases.length ? releases : versions;
+
+        list.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
+        const latest = list[0];
+        return latest?.version_number || latest?.name || null;
+    }
+
+    async function setModrinthPills({ project, versionPillId, downloadsPillId, downloadsLabel }) {
+        const vEl = document.getElementById(versionPillId);
+        const dEl = document.getElementById(downloadsPillId);
+
+        try {
+            const [ver, dl] = await Promise.all([
+                getModrinthLatestVersion(project),
+                getModrinthDownloads(project)
+            ]);
+
+            if (vEl && ver) vEl.textContent = `Mod Version: ${ver}`;
+            if (dEl) dEl.textContent = `${downloadsLabel}: ${formatCount(dl)}`;
+        } catch (e) {
+            // Leave fallbacks if anything fails
+        }
+    }
+
+    // -------------------------
+    // CFWidget (CurseForge) - with retry for 202 queued responses
+    // -------------------------
+    async function fetchCFWidget(path, retries = 7, delayMs = 650) {
+        const url = `https://api.cfwidget.com/${path}`;
+
+        for (let i = 0; i <= retries; i++) {
+            const res = await fetch(url, { headers: { "Accept": "application/json" } });
+
+            if (res.status === 202) {
+                if (i === retries) throw new Error("CFWidget queued too long");
+                await new Promise(r => setTimeout(r, delayMs));
+                continue;
+            }
+
+            if (!res.ok) throw new Error(`CFWidget error ${res.status}`);
+            return await res.json();
+        }
+
+        throw new Error("CFWidget fetch failed");
+    }
+
+    function extractTotalDownloads(data) {
+        const d = data && data.downloads ? data.downloads : null;
+        if (!d) return NaN;
+
+        const candidates = [
+            d.total,
+            d.totalDownloads,
+            d.downloads,
+            d.all_time,
+            d.allTime
+        ];
+
+        for (const v of candidates) {
+            const num = Number(v);
+            if (Number.isFinite(num)) return num;
+        }
+
+        return NaN;
+    }
+
+    async function setBladeboundTotalDownloads() {
+        const pill = document.getElementById("bb-total-downloads");
+        if (!pill) return;
+
+        const mrProject = "bladebound";
+        const cfPath = "minecraft/mc-mods/bladebound";
+
+        try {
+            const [mr, cfData] = await Promise.all([
+                getModrinthDownloads(mrProject),
+                fetchCFWidget(cfPath)
+            ]);
+
+            const cf = extractTotalDownloads(cfData);
+            const total = mr + (Number.isFinite(cf) ? cf : 0);
+
+            pill.textContent = `Total Downloads: ${formatCount(total)}`;
+        } catch (e) {
+            // Leave fallback if anything fails
+        }
+    }
+
+    async function setAddonDownloads(pillId, cfPath) {
+        const pill = document.getElementById(pillId);
+        if (!pill) return;
+
+        try {
+            const data = await fetchCFWidget(cfPath);
+            const total = extractTotalDownloads(data);
+
+            if (Number.isFinite(total)) {
+                pill.textContent = `Downloads: ${formatCount(total)}`;
+            }
+        } catch (e) {
+            // Leave fallback if anything fails
+        }
+    }
+
+    // -------------------------
+    // Run (index)
+    // -------------------------
+    // Bladebound: version from Modrinth
+    setModrinthPills({
+        project: "bladebound",
+        versionPillId: "bb-mod-version",
+        downloadsPillId: "bb-total-downloads", // will be overwritten by total (MR+CF) below
+        downloadsLabel: "Total Downloads"
+    });
+
+    // Bladebound: total downloads (Modrinth + CurseForge)
+    setBladeboundTotalDownloads();
+
+    // OreFeller: downloads (CurseForge Bedrock addons)
+    setAddonDownloads("of-total-downloads", "minecraft-bedrock/addons/orefeller");
+</script>
 </body>
 </html>

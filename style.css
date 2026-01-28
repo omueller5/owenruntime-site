@@ -694,3 +694,27 @@ a.card {
     padding: 0;
     margin-bottom: 1.25rem;
 }
+
+/* ===== Status pill colors (keeps your existing .pill style) ===== */
+.pill.status-done {
+    background: rgba(46, 204, 113, 0.16);   /* green tint */
+    border-color: rgba(46, 204, 113, 0.42);
+    color: rgba(255, 255, 255, 0.96);
+}
+
+.pill.status-dev {
+    background: rgba(241, 196, 15, 0.16);   /* yellow tint */
+    border-color: rgba(241, 196, 15, 0.42);
+    color: rgba(255, 255, 255, 0.96);
+}
+
+.pill.status-hold {
+    background: rgba(231, 76, 60, 0.16);    /* red tint */
+    border-color: rgba(231, 76, 60, 0.42);
+    color: rgba(255, 255, 255, 0.96);
+}
+
+/* Optional: keep hover consistent (slightly stronger tint) */
+.pill.status-done:hover { background: rgba(46, 204, 113, 0.22); }
+.pill.status-dev:hover  { background: rgba(241, 196, 15, 0.22); }
+.pill.status-hold:hover { background: rgba(231, 76, 60, 0.22); }

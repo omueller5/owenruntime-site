@@ -26,39 +26,87 @@
     <section class="section">
         <h1>Projects</h1>
         <p>
-            Here are some of the things I’m working on. Each project card
-            has screenshots and a short description. Right now the main
-            focus is my Local LLM Chat (Mochi) project, with more to come.
+            This page highlights some of the tools, experiments, and side projects I’ve worked on.
+            While most of my time (around 70%) is currently focused on <strong>Bladebound</strong>,
+            I also enjoy experimenting with other ideas—ranging from local tooling to small games
+            and automation projects.
         </p>
+    </section>
+
+    <!-- Game Bot project block (Endfield) -->
+    <section class="section project-block" id="game-bots">
+        <div class="project-header">
+            <h2>Game Bot: Endfield</h2>
+
+            <!-- Pills -->
+            <div class="project-tags">
+                <span class="pill">Discord Bot</span>
+                <span class="pill">Automation Tool</span>
+                <span class="pill status-dev">In Development</span>
+            </div>
+
+            <p>
+                A game-specific Discord bot designed to keep servers updated automatically.
+                It posts official news with excerpts, auto-posts new tweets while ignoring
+                pinned posts, and provides an <code>/endfield</code> command with optional
+                daily login automation via an <code>endfield.js</code> helper script.
+            </p>
+        </div>
+
+        <div class="project-gallery">
+            <figure class="shot">
+                <img src="assets/images/projects/endfield_bot_1.png"
+                     alt="Endfield bot posting news update" />
+                <figcaption>News post + excerpt</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="assets/images/projects/endfield_bot_2.png"
+                     alt="Endfield bot posting patch/update" />
+                <figcaption>Tweet for patch notes</figcaption>
+            </figure>
+
+            <figure class="shot">
+                <img src="assets/images/projects/endfield_bot_3.png"
+                     alt="Endfield bot command output in Discord" />
+                <figcaption>/endfield command</figcaption>
+            </figure>
+        </div>
     </section>
 
     <!-- Local LLM Chat / Mochi project block -->
     <section class="section project-block">
         <div class="project-header">
             <h2>Local LLM Chat (Mochi)</h2>
+
+            <!-- Pills -->
+            <div class="project-tags">
+                <span class="pill">Local AI Chat</span>
+                <span class="pill">Custom UI</span>
+                <span class="pill status-hold">On Hold</span>
+            </div>
+
             <p>
-                A local AI chat interface with a custom UI, memory,
-                and tools. Designed to feel responsive, themed, and
-                comfortable to use for long sessions.
+                A local AI chat interface with a custom UI, memory system,
+                and extensible tooling. Built to feel responsive and
+                comfortable for long sessions, and currently paused
+                while focus is directed toward other projects.
             </p>
         </div>
 
         <div class="project-gallery">
-            <!-- Screenshot 1 -->
             <figure class="shot">
                 <img src="assets/images/projects/LLM1.png"
                      alt="Mochi chat UI main window" />
                 <figcaption>Main chat view</figcaption>
             </figure>
 
-            <!-- Screenshot 2 -->
             <figure class="shot">
                 <img src="assets/images/projects/LLM2.png"
                      alt="Conversation with Mochi showing responses" />
                 <figcaption>Conversation in progress</figcaption>
             </figure>
 
-            <!-- Screenshot 3 -->
             <figure class="shot">
                 <img src="assets/images/projects/LLM3.png"
                      alt="Settings or controls for Mochi chat" />
@@ -71,43 +119,49 @@
     <section class="section project-block">
         <div class="project-header">
             <h2>Neon Dodger</h2>
+
+            <!-- Pills -->
+            <div class="project-tags">
+                <span class="pill">Game</span>
+                <span class="pill">Java</span>
+                <span class="pill status-done">Complete</span>
+            </div>
+
             <p>
-                A fast-paced Java arcade survival game. Dodge falling neon blocks as long as you can,
-                with multiple difficulty modes, near-miss effects, screen shake, and a clean neon UI.
+                A fast-paced Java arcade survival game. Dodge falling neon blocks
+                as long as you can, featuring multiple difficulty modes,
+                near-miss effects, screen shake, and a clean neon visual style.
             </p>
         </div>
 
         <div class="project-gallery">
-            <!-- Gameplay GIF -->
             <figure class="shot">
                 <img src="assets/images/projects/neondodger.gif"
                      alt="Neon Dodger gameplay GIF" />
                 <figcaption>Gameplay highlight</figcaption>
             </figure>
 
-            <!-- Screenshot 1 -->
             <figure class="shot">
                 <img src="assets/images/projects/neondodger1.png"
-                     alt="Neon Dodger main menu with difficulty selection" />
+                     alt="Neon Dodger main menu" />
                 <figcaption>Main menu</figcaption>
             </figure>
 
-            <!-- Screenshot 2 -->
             <figure class="shot">
                 <img src="assets/images/projects/neondodger2.png"
-                     alt="Neon Dodger gameplay with neon obstacles" />
+                     alt="Neon Dodger gameplay screen" />
                 <figcaption>Post game screen</figcaption>
             </figure>
         </div>
     </section>
 
-    <!-- Placeholder for future projects -->
+    <!-- Placeholder -->
     <section class="section project-block muted">
         <div class="project-header">
             <h2>More Projects Coming Soon</h2>
             <p>
-                As I build additional tools and experiments, they’ll
-                appear here with their own screenshots and details.
+                As I continue experimenting and building new tools,
+                additional projects will appear here over time.
             </p>
         </div>
     </section>
@@ -117,7 +171,6 @@
     <p>© <span id="year"></span> Owen Lab. All rights reserved.</p>
 </footer>
 
-<!-- Lightbox overlay for enlarged screenshots -->
 <div class="lightbox-overlay" id="lightbox">
     <div class="lightbox-inner">
         <span class="lightbox-close" id="lightboxClose">&times;</span>
