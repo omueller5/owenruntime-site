@@ -46,22 +46,24 @@
         <br>
 
         <div class="cards">
-            <!-- Projects highlight (Endfield Bot) -->
-            <a class="card mod-card" href="projects.html#game-bots">
+            <!-- Projects highlight (Shiny Tracker) -->
+            <a class="card mod-card" href="projects.html#shiny-tracker">
                 <div class="card-label">Projects</div>
-                <h3>Endfield Discord Bot</h3>
+                <h3>Shiny Tracker</h3>
 
                 <div class="project-tags">
-                    <span class="pill">Discord Bot</span>
-                    <span class="pill">Automation Tool</span>
+                    <span class="pill">Desktop App</span>
+                    <span class="pill">Java</span>
+                    <span class="pill" id="st-version">Version: …</span>
                     <span class="pill status-dev">In Development</span>
                 </div>
 
                 <p>
-                    A game-specific Discord bot for Arknights: Endfield that auto-posts
-                    official news (with excerpts), handles tweets correctly, and provides
-                    an /endfield command.
+                    A fully offline desktop application for tracking Pokémon shiny hunts.
+                    Track encounters, log phases, view probability milestones, browse a
+                    built-in Pokédex, and calculate catch odds.
                 </p>
+
                 <span class="card-cta">View project →</span>
             </a>
 
@@ -264,8 +266,40 @@
     }
 
     // -------------------------
+    // GitHub
+    // -------------------------
+    async function setGitHubLatestReleaseVersion({ owner, repo, pillId, label = "Version" }) {
+        const pill = document.getElementById(pillId);
+        if (!pill) return;
+
+        try {
+            const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`, {
+                headers: { "Accept": "application/vnd.github+json" }
+            });
+            if (!res.ok) throw new Error(`GitHub release API error ${res.status}`);
+
+            const data = await res.json();
+            const version = data?.tag_name || data?.name;
+
+            if (version) {
+                pill.textContent = `${label}: ${version}`;
+            }
+        } catch (e) {
+            // Leave fallback if anything fails
+        }
+    }
+
+    // -------------------------
     // Run (index)
     // -------------------------
+    // Shiny Tracker: version from GitHub releases
+    setGitHubLatestReleaseVersion({
+        owner: "omueller5",
+        repo: "shiny-tracker",
+        pillId: "st-version",
+        label: "Version"
+    });
+
     // Bladebound: version from Modrinth
     setModrinthPills({
         project: "bladebound",
