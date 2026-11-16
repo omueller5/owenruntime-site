@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reverse: 1999 Team Builder</title>
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top-nav">
+    <div class="nav-left">
+        <a href="index.html" class="brand">Owen Lab</a>
+    </div>
+
+    <nav class="nav-links">
+        <a href="index.html" class="nav-btn">Overview</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="mods.html" class="nav-btn">Mods</a>
+        <a href="addons.html" class="nav-btn">Addons</a>
+        <a href="reverse1999.html" class="nav-btn active">Reverse: 1999</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Reverse: 1999 Dashboard</h1>
+
+    <div class="tab-navigation">
+        <button class="tab-btn active" data-tab="tab-roster">Character Roster</button>
+        <button class="tab-btn" data-tab="tab-teams">Team Builder</button>
+        <button class="tab-btn" data-tab="tab-guides">Guides & Info</button>
+    </div>
+
+    <!-- TAB 1: Character Roster Content -->
+    <section id="tab-roster" class="tab-content active">
+        <div class="filter-controls">
+
+            <!-- Main Horizontal Bar: Search, Stats, and Global Actions -->
+            <div class="filter-top-bar">
+                <input type="text" id="char-search" placeholder="Search characters...">
+
+                <div class="collection-stats">
+                    <span>Owned: <strong id="owned-count">0</strong> / <span id="total-count">0</span></span>
+                </div>
+
+                <div class="utility-buttons">
+                    <button id="reset-filters" class="action-btn">Reset</button>
+                    <button id="select-all" class="action-btn">Select All</button>
+                    <button id="unselect-all" class="action-btn">Unselect All</button>
+                </div>
+            </div>
+
+            <!-- Consolidated Horizontal Group for all attribute button sets -->
+            <div class="filter-button-group">
+                <!-- Rarity -->
+                <div class="filter-segment">
+                    <button class="rarity-btn active" data-rarity="all">All Rarity</button>
+                    <button class="rarity-btn" data-rarity="6">6★</button>
+                    <button class="rarity-btn" data-rarity="5">5★</button>
+                    <button class="rarity-btn" data-rarity="4">4★</button>
+                    <button class="rarity-btn" data-rarity="3">3★</button>
+                    <button class="rarity-btn" data-rarity="2">2★</button>
+                </div>
+
+                <!-- Focus -->
+                <div class="filter-segment">
+                    <button class="focus-btn active" data-focus="all">All Focus</button>
+                    <button class="focus-btn" data-focus="ATK">ATK</button>
+                    <button class="focus-btn" data-focus="DMG">DMG</button>
+                    <button class="focus-btn" data-focus="CRIT">CRIT</button>
+                    <button class="focus-btn" data-focus="DEF">DEF</button>
+                </div>
+
+                <!-- Afflatus Type -->
+                <div class="filter-segment">
+                    <button class="type-btn active" data-type="all">All Types</button>
+                    <button class="type-btn" data-type="Mineral" title="Mineral">
+                        <img src="assets/images/reverse1999/afflatus/afl_mineral.png" alt="Mineral" class="type-icon">
+                    </button>
+                    <button class="type-btn" data-type="Beast" title="Beast">
+                        <img src="assets/images/reverse1999/afflatus/afl_beast.png" alt="Beast" class="type-icon">
+                    </button>
+                    <button class="type-btn" data-type="Plant" title="Plant">
+                        <img src="assets/images/reverse1999/afflatus/afl_plant.png" alt="Plant" class="type-icon">
+                    </button>
+                    <button class="type-btn" data-type="Star" title="Star">
+                        <img src="assets/images/reverse1999/afflatus/afl_star.png" alt="Star" class="type-icon">
+                    </button>
+                    <button class="type-btn" data-type="Spirit" title="Spirit">
+                        <img src="assets/images/reverse1999/afflatus/afl_spirit.png" alt="Spirit" class="type-icon">
+                    </button>
+                    <button class="type-btn" data-type="Intellect" title="Intellect">
+                        <img src="assets/images/reverse1999/afflatus/afl_intellect.png" alt="Intellect" class="type-icon">
+                    </button>
+                </div>
+
+                <!-- Damage Type -->
+                <div class="filter-segment">
+                    <button class="dmg-btn active" data-dmg="all">All Dmg</button>
+                    <button class="dmg-btn" data-dmg="Reality">Reality</button>
+                    <button class="dmg-btn" data-dmg="Mental">Mental</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="character-list"></div>
+    </section>
+
+    <!-- TAB 2: Team Builder Grid Container -->
+    <section id="tab-teams" class="tab-content">
+        <div class="team-builder-controls">
+            <h2>Strategic Team Formations</h2>
+            <button id="add-team-btn" class="action-btn">+ Create New Team</button>
+        </div>
+
+        <div id="teams-container"></div>
+
+        <!-- Selection Modal Pop-up -->
+        <div id="char-picker-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3 style="margin: 0;">Select a Character</h3>
+                        <small id="modal-synergy-note" style="color: #8d92b1; font-size: 0.78rem;"></small>
+                    </div>
+                    <button id="close-picker-btn" class="close-btn">&times;</button>
+                </div>
+                <div class="modal-search-wrapper" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <input type="text" id="modal-search" placeholder="Search characters..." style="flex: 1; min-width: 180px;">
+                    <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #c0c3d7; cursor: pointer; user-select: none;">
+                        <input type="checkbox" id="modal-owned-only" checked>
+                        Owned Roster Only
+                    </label>
+                </div>
+                <div id="modal-char-grid" class="modal-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 3: Guides & Info Content -->
+    <section id="tab-guides" class="tab-content">
+        <div class="guides-header-block" style="margin-bottom: 1.5rem; border-bottom: 1px solid #23263a; padding-bottom: 10px;">
+            <h2>Guides & Reference Hub</h2>
+            <p class="hub-subtitle" style="color: #8d92b1; margin: 4px 0 0 0; font-size: 0.9rem;">Essential game mechanics, math modifiers, and progression rules.</p>
+        </div>
+
+        <div class="guides-flat-layout" style="display: flex; flex-direction: column; gap: 24px;">
+
+            <!-- SECTION 1: AFFLATUS COUNTERS -->
+            <div class="guide-section-card" style="background: #101221; border: 1px solid #23263a; border-radius: 8px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                <div class="guide-card-header" style="margin-bottom: 14px; border-bottom: 1px solid #1c1e33; padding-bottom: 8px;">
+                    <h4 style="margin: 0; font-size: 1.1rem; color: #ff4b8b;">Afflatus Attunement & Counters</h4>
+                    <div class="guide-subtitle" style="font-size: 0.8rem; color: #8d92b1; margin-top: 2px;">Understanding elemental weaknesses and the 30% damage modifier.</div>
+                </div>
+                <div class="guide-card-body">
+                    <div class="guide-grid-two" style="display: flex; flex-wrap: wrap; gap: 16px;">
+                        <div class="guide-inner-block" style="flex: 1; min-width: 250px; background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                            <h5 style="margin: 0 0 8px 0; font-size: 0.9rem; color: #ffffff;">The Law of Countering</h5>
+                            <p style="margin: 0 0 12px 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;">Attacking an enemy with an advantageous Afflatus grants a massive <strong>+30% DMG dealt</strong> bonus. Plan teams carefully around stage weaknesses.</p>
+                            <div class="guide-flow-diagram" style="font-size: 0.8rem; font-weight: bold; color: #e0e0e0; display: flex; gap: 6px; align-items: center;">
+                                <span class="flow-node node-beast" style="color: #ff5a5a;">Beast</span> &rarr;
+                                <span class="flow-node node-plant" style="color: #5eff5e;">Plant</span> &rarr;
+                                <span class="flow-node node-star" style="color: #5ebcff;">Star</span> &rarr;
+                                <span class="flow-node node-mineral" style="color: #ffda5e;">Mineral</span> &rarr;
+                                <span class="flow-node node-beast" style="color: #ff5a5a;">Beast</span>
+                            </div>
+                        </div>
+                        <div class="guide-inner-block" style="flex: 1; min-width: 250px; background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                            <h5 style="margin: 0 0 8px 0; font-size: 0.9rem; color: #ffffff;">The Light & Dark Axis</h5>
+                            <p style="margin: 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;"><strong>Spirit</strong> and <strong>Intellect</strong> exist outside the main cycle. They deal <strong>+30% DMG</strong> exclusively to each other, making them neutral wildcards against the standard four types.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: RESONANCE GRIDS -->
+            <div class="guide-section-card" style="background: #101221; border: 1px solid #23263a; border-radius: 8px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                <div class="guide-card-header" style="margin-bottom: 14px; border-bottom: 1px solid #1c1e33; padding-bottom: 8px;">
+                    <h4 style="margin: 0; font-size: 1.1rem; color: #ff4b8b;">Resonance Tile Positioning</h4>
+                    <div class="guide-subtitle" style="font-size: 0.8rem; color: #8d92b1; margin-top: 2px;">Maximizing the grid layout (Per Tile Max stats) for character blocks.</div>
+                </div>
+                <div class="guide-card-body">
+                    <div class="guide-stack" style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="guide-inner-block" style="background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                            <h5 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #ffffff;">Grid Optimization Basics</h5>
+                            <p style="margin: 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;">Resonance layouts directly scale your character's baseline combat math. Shapes must be fit tightly together to maximize stat density per block.</p>
+                        </div>
+                        <div class="guide-grid-three" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                            <div class="guide-inner-block border-numeric" style="background: #111e16; border: 1px solid #1d3d27; padding: 12px; border-radius: 6px;">
+                                <h6 style="margin: 0 0 6px 0; font-size: 0.85rem; color: #81caa0;">Critical Focus</h6>
+                                <p style="margin: 0; font-size: 0.8rem; color: #a3ffd1; line-height: 1.4;">Prioritize L-shapes and cross tiles for raw Crit Rate and Crit DMG amplifiers. Ideal for main damage dealers like 37.</p>
+                            </div>
+                            <div class="guide-inner-block border-mechanic" style="background: #15192d; border: 1px solid #262d4f; padding: 12px; border-radius: 6px;">
+                                <h6 style="margin: 0 0 6px 0; font-size: 0.85rem; color: #9da9e4;">Survivability / DEF</h6>
+                                <p style="margin: 0; font-size: 0.8rem; color: #cbd5ff; line-height: 1.4;">Square blocks and long straight lines offer higher block efficiency for HP, Reality DEF, and Mental DEF scaling.</p>
+                            </div>
+                            <div class="guide-inner-block" style="background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                                <h6 style="margin: 0 0 6px 0; font-size: 0.85rem; color: #ffffff;">Quick Block Check</h6>
+                                <p style="margin: 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;">Always fill every tile in your grid. Leaving an empty slot reduces total passive bonuses by a significant margin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: PSYCHUBES -->
+            <div class="guide-section-card" style="background: #101221; border: 1px solid #23263a; border-radius: 8px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                <div class="guide-card-header" style="margin-bottom: 14px; border-bottom: 1px solid #1c1e33; padding-bottom: 8px;">
+                    <h4 style="margin: 0; font-size: 1.1rem; color: #ff4b8b;">Psychube Integration Guide</h4>
+                    <div class="guide-subtitle" style="font-size: 0.8rem; color: #8d92b1; margin-top: 2px;">Matching Amplifications and basic stat lines to proper character kits.</div>
+                </div>
+                <div class="guide-card-body">
+                    <div class="guide-stack" style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="guide-inner-block" style="background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                            <h5 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #ffffff;">Choosing a Psychube</h5>
+                            <p style="margin: 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;">Psychubes provide flat base attributes alongside a unique conditional Amplification skill. Always build around a character's specific action cycle.</p>
+                        </div>
+                        <div class="guide-grid-two" style="display: flex; flex-wrap: wrap; gap: 16px;">
+                            <div class="guide-inner-block" style="flex: 1; min-width: 250px; background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                                <h6 style="margin: 0 0 6px 0; font-size: 0.85rem; color: #ffffff;">Main DPS Requirements</h6>
+                                <p style="margin: 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;">Look for Psychubes offering <strong>Incantation DMG</strong> or <strong>Crit Rate / Crit DMG</strong> base traits. Amplifications should trigger easily on standard attack cards or Ultimate casts.</p>
+                            </div>
+                            <div class="guide-inner-block" style="flex: 1; min-width: 250px; background: #141627; border: 1px solid #1e2138; padding: 12px; border-radius: 6px;">
+                                <h6 style="margin: 0 0 6px 0; font-size: 0.85rem; color: #ffffff;">Support & Healer Roles</h6>
+                                <p style="margin: 0; font-size: 0.8rem; color: #c0c3d7; line-height: 1.4;">Prioritize Psychubes scaling with <strong>Healing Done</strong>, <strong>Damage Taken Reduction</strong>, or metrics that grant extra Moxie points to accelerate rotations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© <span id="year"></span> Owen Lab. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,940 @@
+# Reverse: 1999 — Character Database (Global)
+# ──────────────────────────────────────────────────────────────────────────────────────
+# RESONANCE SYSTEM OVERVIEW
+# ──────────────────────────────────────────────────────────────────────────────────────
+# In-game term: Resonance (arcanists) / Portrayal (human characters — same mechanic)
+# Characters slot 'Thought Fragments' (tiles) onto a growing grid board.
+# Grid expands at R3, R5, R7, R9, R10. Max useful level: R10 (7x7 grid, no new space R11+).
+# Max level is R15, but R11-15 only upgrades the main tile — very low return on investment.
+#
+# THOUGHT FRAGMENT TILES (official in-game name) — max (LV.3) stats:
+#   "-"  (1-cell, DEF)       : HP +1%,  DMG Taken Reduction +0.5%
+#   "+"  (1-cell, DMG/DEF)   : HP +1%,  DMG Bonus +0.5%
+#   "D"  (2-cell, CRIT)      : Crit DMG +3%,  DMG Taken Reduction +1%
+#   "C"  (3-cell, ATK/CRIT)  : ATK +1.5%,  Crit Rate +2.5%
+#   "I"  (4-cell, ATK/DEF)   : HP +3%,  ATK +3%,  Mental DEF +3%
+#   "T"  (4-cell, ATK/DEF)   : HP +3%,  ATK +3%,  Reality DEF +3%
+#   "O"  (4-cell, DEF)       : HP +3%,  Reality DEF +3%,  Mental DEF +3%
+#   "S"  (4-cell, DMG/CRIT)  : Crit Rate +2.5%,  Crit Resist Rate +2%,  DMG Bonus +3%
+#   "Z"  (4-cell, DEF)       : Crit Resist Rate +5%,  Crit DEF +5%,  DMG Taken Reduction +4.5%
+#   "L"  (4-cell, DMG/CRIT)  : Crit Rate +3.5%,  DMG Bonus +2.5%,  DMG Taken Reduction +2%
+#   "J"  (4-cell, CRIT)      : Crit Rate +6%,  Crit Resist Rate +2%,  Crit DMG +3.5%
+#
+# RESONANCE PATTERNS (each character has one main tile type):
+#   MZ = Balanced offensive          | MT = Strongly offensive (DMG-focused)
+#   MU = Strongly defensive          | M+ = Strongly offensive (CRIT-focused)
+#
+# FOCUS BUILDS — recommended tile priority:
+#   ATK  → I, T, O   (HP / ATK / DEF)                  Best for: healers, shields, genesis DMG
+#   DMG  → S, L      (DMG Bonus / Crit Rate)             Best for: most DPS with scaling skills
+#   CRIT → J, L      (Crit Rate / Crit DMG)              Best for: units reaching near-100% Crit
+#   DEF  → Z, I,T,O  (HP / Crit Resist / DMG Reduction)  Best for: tanks & dedicated sustain
+#
+# STAT SCALING REFERENCE (approximate full optimal load at R10):
+#   ATK  build : ATK ~18-24%, HP ~15-20%
+#   DMG  build : DMG Bonus ~12-18%, Crit Rate ~10-15%
+#   CRIT build : Crit Rate ~30-40%, Crit DMG ~15-25%
+#   DEF  build : HP ~15-20%, DMG Taken Reduction ~9-12%, Crit DEF ~10-15%
+# ──────────────────────────────────────────────────────────────────────────────────────
+# CHARACTER FORMAT:
+# Name | ★ | Afflatus | DmgType | Global Patch | Release Date | Res.Focus | Tags
+# ──────────────────────────────────────────────────────────────────────────────────────
+
+# Portray: P1-P5 skill upgrades (duplicate pulls)
+#----------------------------------------------------------------------------------------
+
+37                 | 6★  | Star        | Mental   | v1.4       | Feb. 29, 2024   | R:CRIT  | DPS, Follow-up Attack, Support
+  P1: Calculation of Genesis: When entering battle, Critical Rate boost increased to 40%.
+  P2: Calculation of Genesis: [Supplementary Formula]'s Mental DMG is increased to 180%; additional Genesis DMG increased to (own ATK x60%).
+  P3: Kingdom of Geometry: [Enlightenment] increased to 3 stacks; Eureka gained increased to 3.
+  P4: Calculation of Genesis: [Supplementary Formula]'s Mental DMG is increased to 240%; additional Genesis DMG increased to (own ATK x80%).
+  P5: Kingdom of Geometry: [Numeral Perception] increased to 3 stacks; Eureka gained increased to 4.
+
+6                  | 6★  | Intellect   | Mental   | v1.4       | Feb. 29, 2024   | R:ATK   | Support, Debuff, Purify
+  P1: *The Revelation*: If at **5** or more Eureka, spend **5** Eureka to deal **100%** increased Mental DMG to the target for every **1** type of *[Stats Down]*, *[Neg Status]*, or *[Control]* status they have.
+  P2: *Advocator of Knowledge*: Gain **1** additional Eureka. When attacking targets with *[Stats Down]*, *[Neg Status]* or *[Control]* statuses, the DMG Dealt increases to **24%**.
+  P3: *Duty*: At Incantation rank **1/2/3**, becomes purify **3/5/7** random types of *[Stats Down]*, *[Neg Status]*, or *[Control]* statuses for a single ally.
+  P4: *The Revelation*: Increased Mental DMG Dealt now at **125%**.
+  P5: *The Revelation*: If at **4** or more Eureka, spend **4** Eureka to deal increased Mental DMG to the target for every **1** type of *[Stats Down]*, *[Neg Status]*, or *[Control]* status they have. Increases up to **6** times.
+
+A Knight           | 6★  | Spirit      | Reality  | v1.7       | Jul. 11, 2024   | R:DMG   | DPS
+  P1: *After AD 778*: Reality DMG increased to **500%**.
+  P2: *Justice*: At Incantation rank **1/2/3**, Reality DMG increased to **200/275/480%**.
+  P3: *After AD 778*: Reality DMG increased to **550%**.
+  P4: *Glory*: At Incantation Rank **1/2/3**, Reality DMG increased to **165/170/250%**.
+  P5: *After AD 778*: If this attack defeats an enemy, gains **1** additional stack of *[Rousing Morale]*.
+
+Aleph              | 6★  | Intellect   | Mental   | v2.6       | May 29, 2025    | R:ATK   | Support, Inspiration, Burst DMG
+  P1: Disciplinary Power: The duration of [Continuous Action I] is increased to 2 rounds. The chance to recover Eureka is increased to 50%.
+  P2: Reflections of Omniscience: The number of memorized incantations is increased to 3. Each stack of [Interpretation] beyond the first now inflicts Mental DEF -3% and DMG Taken Reduction -3%.
+  P3: Reflections of Omniscience: The additional Mental DMG dealt by Impromptu Incantation's final attack instance is increased to (the target's stacks of [Interpretation] x160)% Mental DMG. When the channel status ends, attack instances granted to [Impromptu Incantation] increased to +4.
+  P4: Idealist's Declaration: [Clarification]'s Incantation Might is increased to +15%.
+  P5: Reflections of Omniscience: The additional Mental DMG dealt by Impromptu Incantation's final attack instance is increased to (the target's stacks of [Interpretation] x240)% Mental DMG. Each stack of [Interpretation] beyond the first now inflicts Mental DEF -5% and DMG Taken Reduction -5%.
+
+Alexios            | 5★  | Beast       | Reality  | vCollab    | Aug. 7, 2025    | R:DMG   | Assassination, DPS
+  P1: "Stronger than Ares.": At rank 1/2/3 incantation, Reality DMG Dealt is increased to 240/360/600%.
+  P2: [Blood or Wail]: At the start of the round, the number of Adrenaline gained is increased to 2.
+  P3: "Better than Apollo!": At rank 1/2/3 incantation, Reality DMG Dealt is increased to 150/225/375%.
+  P4: [Sun of Fear]: [Blood of Isu]'s additional Reality DMG is increased to 100%.
+  P5: [Sun of Fear]: Reality DMG increased to 500%.
+
+AliEn T            | 3★  | Star        | Reality  | v1.6       | May 30, 2024    | R:DEF   | DEF, Control
+  P1: Future Interstellar War: Prelude's effect changes to: deals 230% Reality DMG.
+  P2: The Spotted's effect changes to: additionally deals Reality DMG when the target's HP is above 40%.
+  P3: Future Interstellar War: Prelude's effect changes to: deals 270% Reality DMG.
+  P4: The Spotted's effect changes to: additionally deals Reality DMG when the target's HP is above 30%.
+  P5: Future Interstellar War: Prelude's effect changes to: deals 300% Reality DMG.
+
+An-an Lee          | 6★  | Plant       | Reality  | v2.5       | Apr. 24, 2025   | R:ATK   | Support, Control, DPS
+  P1: Scientific Ghost Buster's effect changes to: deals 450% Reality DMG.
+  P2: Taoist Rune's effect changes to: at 1/2/3 stars, deals 220/330/400% Reality DMG.
+  P3: Scientific Ghost Buster: Reality DMG increased to 500%.
+  P4: Taoist Rune's effect changes to: at 1/2/3 stars, deals 240/360/450% Reality DMG.
+  P5: Scientific Ghost Buster: Reality DMG increased to 550%.
+
+Anjo Nala          | 6★  | Beast       | Mental   | v2.2       | Jan. 9, 2025    | R:DMG   | DPS, Control, Burst DMG
+  P1: [Oath Bound]: [Form and Phantom]'s follow-up attack can now be casted up to 3 times per round, and [Angel's Temptation]'s Mental DMG dealt is increased to 250%.
+  P2: [Twin Phantoms]: When [Angel's Temptation]'s is casted from a completed channel, the Mental DMG dealt is increased to 375%, and the ATK reduction from [Captivated] is boosted to 15%.
+  P3: [FILL IN]
+  P4: [FILL IN]
+  P5: [FILL IN]
+
+APPLe              | 4★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | DPS, Heal
+  P1: Insignificant Achievement's effect changes to: HP +(the caster's ATK x150%) for the ally with the lowest HP percentage.
+  P2: Iridescent White: At Incantation rank 1/2/3, Mental DMG increased to 220/330/550%.
+  P3: Equal Amount of Light's effect changes to: at 1/2/3 stars, HP +(the caster's ATK x56/84/140%).
+  P4: Insignificant Achievement's effect changes to: HP +(the caster's ATK x200%) for the ally with the lowest HP percentage.
+  P5: Insignificant Achievement's effect changes to: HP +(the caster's ATK x250%) for the ally with the lowest HP percentage.
+
+Argus              | 6★  | Plant       | Reality  | v2.1       | Dec. 5, 2024    | R:DMG   | DPS, Debuff, Support
+  P1: Miracle of a Hundred Eyes: At incantation rank 1/2/3, the Reality DMG of [Grave Digger] is increased to 150%/250%/400%.
+  P2: Penetrating Eye: The base effect of [Pinpointed] is increased to 20%, and each stack now inflicts an additional DMG Taken Reduction -2.5% and Critical DEF -2.5%.
+  P3: Miracle of a Hundred Eyes: At incantation rank 1/2/3, the Reality DMG of [Grave Digger] is increased to 200%/350%/500%.
+  P4: Penetrating Eye: The base effect of [Pinpointed] is increased to 25%, and each stack beyond the first now inflicts an additional DMG Taken Reduction -3% and Critical DEF -3%.
+  P5: No Mark Unstruck's effect changes to: deals 700% Reality DMG.
+
+Avgust             | 5★  | Plant       | Mental   | v1.8       | Aug. 8, 2024    | R:ATK   | DPS, Dispeller, Heal
+  P1: Greetings!: At Incantation rank 1/2/3, Mental DMG dealt becomes 140/230/350%.
+  P2: Wish You Good Health: At Incantation rank 1/2/3, [Cure] duration is increased to 2/3/4 rounds.
+  P3: One Stroke After Another's effect changes to: deals 350% Mental DMG.
+  P4: Wish You Good Health: The DMG Heal increase is now 15% to self and allies behind.
+  P5: Greetings!: The DMG Dealt increase is now +15% to self and allies in front.
+
+Baby Blue          | 5★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | Control, Debuff
+  P1: Tea with Friends's effect changes to: deals 350% Mental DMG.
+  P2: Tea Party: at rank 1/2/3, deals 220/230/400% Mental DMG.
+  P3: Tea with Friends: Mental DMG increased to 400%.
+  P4: Tea with Friends: Mental DMG increased to 450%.
+  P5: Cough Syrup's effect changes to: at 2/3 stars, DMG Taken +25/30%.
+
+Balloon Party      | 5★  | Mineral     | Reality  | v1.0       | Oct. 26, 2023   | R:DEF   | Heal, DEF
+  P1: Good Kids, Bad Adults' effect changes to: After casting, recovers (the target's Missing HP x20%) HP for the ally with the lowest HP percentage.
+  P2: Pinata's effect changes to: when the caster has [Party Balloon] or [Balloon of Innocence], Penetration Rate +70%.
+  P3: Coughing Weirdo's effect changes to: at rank 1/2/3, recovers (the target's Missing HP x30/35/45%) HP for all allies.
+  P4: Good Kids, Bad Adults' effect changes to: deals 300% Reality DMG.
+  P5: Good Kids, Bad Adults' effect changes to: After casting, recovers (the target's Missing HP x30%) HP for the ally with the lowest HP percentage.
+
+Barbara            | 5★  | Spirit      | Mental   | v2.1       | Dec. 5, 2024    | R:ATK   | Support, Shield, Heal
+  P1: Troubled Sheep: Mental DMG increased to 180/270/450%.
+  P2: Chat on the Lawn: The Shield granted is increased to (own ATK x140%/210%/350%) HP.
+  P3: Germ-free Bedroom: Now recovers (Max HP x25%) HP for self and (Max HP x20%) HP for adjacent allies.
+  P4: Germ-free Bedroom: The DMG Taken Reduction is increased to +15%.
+  P5: Another Jump This Way: The duration of [Dream Visit] is increased by 1 round.
+
+Barcarola          | 6★  | Star        | Mental   | v2.4       | Mar. 27, 2025   | R:DMG   | DPS, Support, Inspiration
+  P1: *Cascading Arpeggios*: The attack instances granted to *[Impromptu Incantation]* for the round is increased to **2**.
+  P2: *Solo Symphony*: After each attack instance of *[Impromptu Incantation]* within the same round, the Critical Rate increase is now **+15%** and the Critical DMG increase is now **+15%**.
+  P3: *Cascading Arpeggios*: When at least **3** allies are in the *[Quartet]* status, the additional attack instances granted to *[Impromptu Incantation]* is increased to **2**.
+  P4: *Music of the Heart*: *[Impromptu Incantation]*'s Damage Dealt increase for the round is now +**35%**.
+  P5: *Sea Breeze Serenade*: While in the *[Quartet]* status, after casting an attack-type incantation, grants another **1** additional point of Inspiration to *[Impromptu Incantation]*.
+
+Beryl              | 6★  | Intellect   | Mental   | v3.2       | Jan. 20, 2026   | R:DMG   | DPS, Lingering Glow, Extra Action
+  P1: *[Multiple Refraction]:* The *[Lingering Glow]* accumulation count required to cast *[Destined Doom]* is decreased to **125**.
+  P2: *[Multiple Refraction]:* The number of selectable Emanation crystals is increased to **3**. *[Halo]*'s max stack count is increased to **35**.
+  P3: *[Multiple Refraction]:* The Moxie gained when entering battle is increased to **3**. *[Destined Doom]* and *[Destined Doom - Emanation of Blue]*'s base Mental DMG is increased to **125%** and **125%**, their additional Mental DMG dealt is increased to **150%** and **150%**, *[Emanation of Purple]*'s additional Mental DMG dealt for every 1 point of *[Lingering Glow]* is increased to **0.5%** and **0.5%**, and *[Emanation of Green]*'s additional Mental DMG dealt at incantation rank **1/2/3** is increased to **100/150/187.5%** and **100/150/187.5%**.
+  P4: *[Blaze Through the Lens]:* At incantation rank **1/2/3**, Mental DMG dealt is increased to **300/450/750%** and the number of *[Halo]* stacks inflicted on the target is increased to **6/9/15**. *[Nothing Unexpected]:* At incantation rank **1/2/3**, the number of *[Vision]* stacks granted is increased to **4/6/10**.
+  P5: *[Multiple Refraction]:* The number of selectable Emanation crystals is increased to **4**, and the maximum number of each type of Emanation crystal that can be selected is increased to **3**. *[Halo]*'s max stack count is increased to **40**.
+
+Bette              | 3★  | Mineral     | Reality  | v2.6       | May 29, 2025    | R:ATK   | Support, Shield
+  P1: Every Audition's effect changes to: inflicts a [Shield] with (the caster's ATK x130%) HP on a single ally.
+  P2: Classic Shot's effect changes to: Penetration Rate +40%.
+  P3: Every Audition's effect changes to: inflicts a [Shield] with (the caster's ATK x160%) HP on a single ally.
+  P4: Every Audition's effect changes to: inflicts a [Shield] with (the caster's ATK x200%) HP on a single ally.
+  P5: Every Audition's effect changes to: inflicts a [Shield] with (the caster's ATK x250%) HP on a single ally.
+
+Bkornblume         | 5★  | Plant       | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Debuff, Burst DMG, Control
+  P1: *Uninvited Reviewer's* effect changes to: deals **625%** Reality DMG.
+  P2: *Watch Your Sleeves'* effect changes to: at **1/2/3** stars, additionally deals **45/65/100%** Reality DMG to enemies in *[Stats Down]*, *[Neg Status]*, or *[Control]* statuses.
+  P3: *Uninvited Reviewer's* effect changes to: deals **675%** Reality DMG.
+  P4: *Uninvited Reviewer's* effect changes to: deals **750%** Reality DMG.
+  P5: *Uninvited Reviewer's* effect changes to: deals **800%** Reality DMG.
+
+Blonney            | 5★  | Star        | Reality  | v1.2       | Dec. 7, 2023    | R:DMG   | Burst DMG, DPS
+  P1: Bloody Movie: Changes Critical Rate increase effect to 30%.
+  P2: Bunny Boiler: When at Incantation Rank 1/2/3, this attack's Critical Rate and Critical DMG increase effect changes to 30%.
+  P3: Bloody Movie's effect changes to: deals 300% Reality DMG.
+  P4: Chainsaw Massacre's effect changes to: at 1/2/3 stars, deals 220/280/500% Reality DMG.
+  P5: Bloody Movie: Increases Critical Rate increase effect to 40%.
+
+Brimley            | 5★  | Mineral     | Mental   | v2.3       | Feb. 20, 2025   | R:ATK   | Support, Dispeller, Extra Action
+  P1: Keep Up the Pace!: At incantation rank 1/2/3, Mental DMG is increased to 140%/210%/350%.
+  P2: Giddy Up, Mate!'s effect changes to: deals 350% Mental DMG.
+  P3: Hat-First Into Action: When casting [Hop On!], the additional types of [Stats Down], [Neg Status], and [Control] statuses dispelled are increased to 3.
+  P4: Giddy Up, Mate!: Mental DMG increased to 400%.
+  P5: Hop On!: [Riding Double]'s bonus ATK multiplier is increased to 8%.
+
+Brume              | 6★  | Beast       | Mental   | v3.2       | Jan. 20, 2026   | R:DMG   | DPS, Extra Action, Dynamo
+  P1: *[Left-Hand Steering] [Improvised Detour]:* The additional Mental DMG *[Crystalline Discharge]* grants to *[Cost of the Roadside View]*/*[End of the Ride]* when attacking is increased to **120%/250%**. *[Calculated Path]:* At incantation rank **1/2/3**, the number of *[Thermoelectric Conversion]* stacks gained is increased to **15/20/25**. The Mental DMG dealt by *[Cost of the Roadside View]* is increased to **240%**. The additional Mental DMG dealt by the next instance of *[Cost of the Roadside View]* for every **10** stacks of *[Thermoelectric Conversion]* consumed by *[Prismatic Power]* is increased to **120%**, the maximum number of *[Thermoelectric Conversion]* stacks that can be consumed at once is increased to **80**, and the maximum number of additional attack instances *[Cost of the Roadside View]* can gain is increased to **3.** *[Essence of a Hero]* *[Amplified Surge]:* The additional Mental DMG dealt by *[Cost of the Roadside View]* while under *[Pulsing Field Lv.3]* is increased to **480%**.
+  P2: *[Testing Flame]:* At incantation rank **1/2/3**, the number of *[Thermoelectric Conversion]* stacks gained is increased to **15/20/25**. *[Truth Tempered]*'s DMG Bonus is increased to **30%**, and the additional Ultimate Might granted to Mental DMG characters is increased to **50%**.
+  P3: *[Essence of a Hero]:* The Mental DMG dealt by *[End of the Ride]* is increased to **800%**, and the maximum additional Mental DMG dealt from consuming as many stacks of *[Thermoelectric Conversion]* as possible is increased to **800%**.
+  P4: *[Essence of a Hero]:* The Mental DMG dealt by *[End of the Ride]* is increased to **1200%**, and its Ultimate Might enhancement multiplier is increased to **125%**. The additional Mental DMG dealt by *[End of the Ride]* for every **10** stacks of *[Thermoelectric Conversion]* consumed is increased to **250%**, and the maximum additional Mental DMG dealt from consuming as many stacks of *[Thermoelectric Conversion]* as possible is increased to **1000%**.
+  P5: *[Testing Flame]:* *[Truth Tempered]*'s DMG Bonus is increased to **40%**, and the additional Ultimate Might granted to Mental DMG characters is increased to **60%**.
+
+Buddy Fairchild    | 5★  | Plant       | Reality  | v2.8       | Sep. 19, 2025   | R:DMG   | DPS, Burst DMG, Moxie
+  P1: *The Nutcracker Super Squad:* For every **1** stack of *[Buddy Badge]* consumed, additional Reality DMG dealt is increased to **75%**.
+  P2: *The Nutcracker Super Squad:* Reality DMG increased to **400%**.
+  P3: *The Nutcracker Super Squad:* DMG Dealt increased to **+45%** for all allies.
+  P4: *The Nutcracker Super Squad:* Reality DMG increased to **500%**.
+  P5: *The Nutcracker Super Squad:* For every **1** stack of *[Buddy Badge]* consumed, additional Reality DMG dealt is increased to **100%**.
+
+Bunny Bunny        | 4★  | Beast       | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Heal, Nasty Wound
+  P1: Bunny Medal Cert's effect changes to: HP+(the caster's ATK x220%) for all allies.
+  P2: Custom Bottle's effect changes to: this attack enjoys Critical Rate +30%, Critical DMG +30%.
+  P3: Sweet Gloves's effect changes to: deals 220/280/450% Reality DMG.
+  P4: Bunny Medal Cert's effect changes to: HP+(the caster's ATK x240%) for all allies.
+  P5: Bunny Medal Cert's effect changes to: HP+(the caster's ATK x260%) for all allies.
+
+Centurion          | 6★  | Beast       | Reality  | v1.0       | Oct. 26, 2023   | R:DMG   | DPS, Burst DMG
+  P1: *Victorious General*: Additional Reality DMG increased to the caster's Moxie x**14/21/35%**.
+  P2: *Reality Show Premiere*: Reality DMG increased to **350%**.
+  P3: *Outdoor Superstar*: At Incantation rank **1/2/3**, Reality DMG increased to **165/170/250%**.
+  P4: *Reality Show Premiere*: Reality DMG increased to **400%**.
+  P5: *Victorious General*: Additional Reality DMG increased to the caster's Moxie x**18/27/45%**.
+
+Charlie            | 5★  | Star        | Mental   | v1.4       | Feb. 29, 2024   | R:DMG   | DPS, Dispeller
+  P1: I Stand Alone on the Stage's effect changes to: deals 350% Mental DMG.
+  P2: Thunder to Thee!'s effect changes to: at 1/2/3 stars, additionally deals 60/90/150% Mental DMG.
+  P3: Tempest to Thee!'s effect changes to: additionally deals Mental DMG when the caster's HP is below 80%.
+  P4: Stand Alone on the Stage's effect changes to: deals 425% Mental DMG.
+  P5: Stand Alone on the Stage's effect changes to: deals 500% Mental DMG.
+
+Charon             | 6★  | Spirit      | Mental   | v3.0       | Oct. 30, 2025   | R:ATK   | Dynamo, Support, Extra Action
+  P1: [Advice from the Dead]: [Peaceful Soul]'s extra Critical Rate bonus gained from every stack of [Consternation] is increased to 7.5% (up to 30%); the 'excess Critical Rate to Critical DMG' conversion rate is increased to 100% when Charon has 4 or more stacks of [Consternation].
+  P2: [Spasming Brainwaves]: When entering battle, the stacks of [Dynamo] gained is increased to 30, the stacks of [Shock Wave] gained are increased to 90, and Moxie gained is increased to 3.
+  P3: [New Blooms of Life]: [Day of Remorse]'s Mental DMG dealt is increased to 400%; Ultimate Might enhancement multiplier is increased to 70%.
+  P4: [From the Void]: The Critical DEF decrease from [Fear of Death] for every 1 stack of [Consternation] is increased to 7.5% (and the maximum is increased to 30%). The DMG Taken increase when Charon has 4 stacks of [Consternation] is increased to 40%.
+  P5: [New Blooms of Life]: For every stack of [Consternation] owned, the extra Mental DMG of [Day of Remorse] is increased to 100%; Ultimate Might enhancement multiplier is increased to 12%.
+
+Cheng Heguang      | 6★  | Star        | Reality  | v3.4       | Apr. 16, 2026   | R:CRIT  | DPS, Follow-up Attack, Support
+  P1: [Metallic Trace]: Critical DMG +25%. Incantation Might +50%. [Thus the Night is Calm]: [Lofty Ambition], [Continuous Action I] and [Work as One] durations increased to 3 rounds.
+  P2: [Work as One]: [Piercing Strike] triggers up to 3 times per round. Extra Action DMG Dealt +35%. [Nightlong Sprint]: Moxie gained upon entering combat increased to 5.
+  P3: [Feathered Blades]: Ultimate deals an additional 200% Reality DMG. After reaching 5 stacks of [Feathered Blades], Ultimate gains +30% DMG Dealt.
+  P4: [Slicing Wind]: Deals 240/360/600% Reality DMG. [Feathered Blades] stacks gained increased to 2/4/6. [Piercing Strike] deals 350% Reality DMG. [Feathered Blades] stacks gained increased to 2.
+  P5: [Thus the Night is Calm]: Deals 1100% Reality DMG. [Nightlong Sprint]: [Trail of Steel] stacks required to trigger [Metallic Trace] reduced to 2, Moxie gained when removing [Trail of Steel] increased to 2.
+
+Click              | 5★  | Spirit      | Mental   | v1.0       | Oct. 26, 2023   | R:DMG   | DPS, Debuff
+  P1: A Picture at a Price's effect changes to: deals 350% Mental DMG.
+  P2: The Onlooker's effect changes to: at 1/2/3 stars, deals 220/280/450% Mental DMG.
+  P3: A Picture at a Price: Mental DMG increased to 400%.
+  P4: The Witness's effect changes to: at 1/2/3 stars, deals 220/280/450% Mental DMG.
+  P5: A Picture at a Price: Mental DMG increased to 450%.
+
+Coppélia           | 6★  | Mineral     | Reality  | vCN 3.7    | CN Only         | R:DMG   | DPS, Support
+  P1: [Unison]: Lasts for 4 rounds. +50% Critical Rate. Increases Critical DMG equal to 30% of Coppélia's Critical DMG (up to 72%). 1 [Mineral I] in the Energy Deck will increase Mineral Energy by +2.
+  P2: [Auditory Memory]: At the start of the round, gain +20 Harmonization. Upon entering combat, +60% Instrument Might and gain +45 Harmonization. 2 [Mineral I] in the Energy Deck will increase Mineral Energy by +2.
+  P3: [The Solfege Carved On The Body]: Deals 1440% Reality DMG to all enemies. For every stack of [Interval Step], deals an additional +96% Reality DMG to the primary target. After attacking, consume all [Interval Step] to increase [Instrument Energy Consumption] level by 6.
+  P4: [Finger Training]: Deals 720% Reality DMG. For every level of [Instrument Energy Consumption], deals an additional +180% Reality DMG (up to 20 levels).
+  P5: [Mineral II]: 1 [Mineral II] in the Energy Deck will increase Mineral Energy by +3. [Interval Skip] increases Mineral Energy by +3 and Coppélia gains +20 stacks of [Interval Step]. Maximum stacks of [Interval Step] increases to 50.
+
+Corvus             | 6★  | Intellect   | Mental   | v3.1       | Dec. 11, 2025   | R:DMG   | DPS, Extra Action, Dynamo
+  P1: *Stitch the Fleeting into Eternity:* Mental DMG dealt is increased to **1200%**, the number of stacks of *[Breaking Point]* inflicted on the target is increased to **2**. The amount of Mental DEF decreased when being attacked by a Mental DMG attack is increased to **2%**, and the maximum decrease is increased to **100%**.
+  P2: *Stitch the Fleeting into Eternity:* The number of *[Sew It All Up]* cast is increased to **2**.
+  P3: *Rosy Cracks*: *[Sew It All Up]*'s Mental DMG dealt is increased to **500%**, and the additional Mental DMG dealt while under *[Pulsing Field Lv.2]/[Pulsing Field Lv.3]* is increased to **300/700%**.
+  P4: *Rosy Cracks*: The additional Mental DMG dealt by *[Sew It All Up]* for every 1 stack of *[Electric Arc]* while under *[Pulsing Field Lv.2]* is increased to **8%**. The additional Mental DMG dealt by *[Sew It All Up]* for every 1 stack of *[Electric Arc]* or *[Flickering Arc]* while under *[Pulsing Field Lv.3]* is increased to **8%**.
+  P5: *Arc-Threaded Shot* and *Rosy Cracks:* At incantation rank **1/2/3**, the number of stacks of *[Electric Arc]* granted to self is increased to **4/8/16**. The maximum number of stacks of *[Electric Arc]* is increased to **80**, and the maximum number of stacks of *[Flickering Arc]* is increased to **320**.
+
+Cristallo          | 4★  | Mineral     | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Nasty Wound, Support
+  P1: This is Radiotherapy's effect changes to: deals (the caster's ATK x110%) Genesis DMG.
+  P2: Caged Bird's effect changes to: at 2/3 stars, Reality DEF -30/40%.
+  P3: This is Radiotherapy's effect changes to: deals (the caster's ATK x120%) Genesis DMG.
+  P4: This is Radiotherapy's effect changes to: deals (the caster's ATK x130%) Genesis DMG.
+  P5: This is Radiotherapy's effect changes to: deals (the caster's ATK x140%) Genesis DMG.
+
+Darley Clatter     | 3★  | Beast       | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | Support
+  P1: Great Inspirer's effect changes to: Moxie +2 for other allies.
+  P2: Clatter Trample's effect changes to: Penetration Rate +40%.
+  P3: Great Inspirer's effect changes to: DMG Dealt 35% for all allies.
+  P4: Commanding Aura's effect changes to: at 1/2/3 stars, HP +(the caster's ATK x56/84/140%) for the ally with the lowest HP percentage.
+  P5: Great Inspirer's effect changes to: After casting, recovers (Missing HP x25%) HP for self.
+
+Desert Flannel     | 5★  | Beast       | Reality  | v1.5       | Apr. 18, 2024   | R:ATK   | Support, DPS
+  P1: Beep Beep Bop Bop, Plappy!: Increased to HP+(the user's ATK x120%) for all allies.
+  P2: Beep Beep Bop Bop, Plappy!: Increased to HP+(the user's ATK x140%) for all allies.
+  P3: Mixed Doubles!: At Incantation rank 1/2/3, when in [Pos. Status] or [Counter] status, this attack's Critical Rate and Critical DMG is increased to 35%.
+  P4: The Only Family!: [Plappy]'s Critical Rate and Critical DMG when Riposting is increased to 35%.
+  P5: Beep Beep Bop Bop, Plappy!: Increased to HP+(the user's ATK x160%) for all allies. [Power Burst] is increased to 3 stacks.
+
+Diggers            | 5★  | Plant       | Mental   | v1.1       | Nov. 9, 2023    | R:ATK   | Control, Shield, Debuff
+  P1: Sweet Dreams for You: Mental DMG increased to 500%.
+  P2: Long Live Peace's effect changes to: at 1/2/3 stars, Mental DMG dealt is increased to 220%/230%/450%.
+  P3: Sweet Dreams for You's effect changes to: deals 550% Mental DMG.
+  P4: Long Live Peace's effect changes to: at 2/3 stars, inflicts 1 more stack of [Weakness] on the target.
+  P5: Sweet Dreams for You: Mental DMG increased to 600%.
+
+Dikke              | 5★  | Beast       | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | DPS, Heal
+  P1: Maverick Judge's effect changes to: deals (the caster's ATK x130%) Genesis DMG.
+  P2: Power's effect changes to: at 1/2/3 stars, deals 220/230/350% Mental DMG.
+  P3: Maverick Judge's effect changes to: deals (the caster's ATK x170%) Genesis DMG.
+  P4: Justice's effect changes to: at 1/2/3 stars, HP +(the caster's ATK x70/105/175%).
+  P5: Maverick Judge's effect changes to: deals (the caster's ATK x210%) Genesis DMG.
+
+Door               | 2★  | Intellect   | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Support
+  P1: To the Universe in the Alley's effect changes to: inflicts a [Shield] with (the caster's ATK x150%) HP on all allies.
+  P2: Deep Vortex: At Incantation rank 1/2/3, Reality DMG increased to 220/330/550%.
+  P3: To the Universe in the Alley's effect changes to: inflicts a [Shield] with (the caster's ATK x200%) HP on all allies.
+  P4: Converging Mirror's effect changes to: at 1/2/3 stars, deals 165/245/400% Reality DMG.
+  P5: To the Universe in the Alley's effect changes to: inflicts a [Shield] with (the caster's ATK x250%) HP on all allies.
+
+Druvis III         | 6★  | Plant       | Mental   | v1.0       | Oct. 26, 2023   | R:DMG   | DPS, Control, Support
+  P1: Winds into the Woods' effect changes to: at 2/3 stars, deals 300/400% Mental DMG.
+  P2: Silence in the Woods: Mental DMG increased to 450%.
+  P3: Early Dawn's effect changes to: at 1/2/3 stars, deals 135/200/325% Mental DMG.
+  P4: Silence in the Woods: Mental DMG increased to 500%.
+  P5: Early Dawn's effect changes to: Penetration Rate +40%.
+
+Eagle              | 4★  | Plant       | Reality  | v1.0       | Oct. 26, 2023   | R:CRIT  | Burst DMG, DPS
+  P1: Between Superficiality and Reality's effect changes to: Critical Rate +70%.
+  P2: Old Pocket Watch's effect changes to: at 1/2/3 stars, additionally deals 40/60/100% Reality DMG to enemies in [Stats Down], [Neg Status] or [Control].
+  P3: Finger Lens's effect changes to: Penetration Rate +40%.
+  P4: Between Superficiality and Reality's effect changes to: Critical Rate +100%.
+  P5: Old Pocket Watch's effect changes to: this attack enjoys +20% Leech Rate against enemies in [Stats Down], [Neg Status] or [Control].
+
+Enigma             | 6★  | Intellect   | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | —
+  P1: [Bastion]: Increases the number of [Control] immunity instances all allies can share per round to 6. [26th Input]: Upon entering combat, increase the maximum stack limit of [Dynamo] for all allies to +40. [The Riddle and the Answer]: [Cipher Machine] duration increased to 3 rounds, and the [Ciphertext] count limit increased to 40.
+  P2: [The Riddle and the Answer]: [Cipher Machine] increases all allies' Critical DMG to +30%; for every stack of [Ciphertext] removed, the additional DMG Bonus gained is increased to +2.4%.
+  P3: [Infinite Translation]: At Incantation Rank 1/2/3, Reality DMG Dealt is increased to 240/360/600%. [Closed-Loop Principle]: Reality DMG Dealt is increased to 240%. [The Riddle and the Answer]: [Cipher Machine] for every stack of [Ciphertext] removed, the additional DMG Bonus gained is increased to +2.8%.
+  P4: [26th Input]: Upon entering combat, [Bastion] effect increased to (ATK x340%). [Meshing Minds]: [Bastion] effect increased to (ATK x340/510/850%). When casting [Closed-Loop Principle], [Bastion] effect increased to (ATK x340%).
+  P5: [26th Input]: While in [Pulsing Field Lv.3], when allies attack, each stack of [Dynamo] grants +0.6% Incantation Might. Reality DMG characters deal an additional +8% Reality DMG per stack of [Dynamo]. Mental DMG characters gain an additional +0.6% Incantation Might per stack of [Dynamo].
+
+Erick              | 4★  | Star        | Reality  | v1.5       | Apr. 18, 2024   | R:DMG   | DPS, Dispeller
+  P1: Glory to the Jarl: Reality DMG increased to 500%.
+  P2: Heavy Axe's effect changes to: at 1/2/3 stars, deals 220/230/350% Reality DMG.
+  P3: Glory to the Jarl: Reality DMG increased to 550%.
+  P4: Wooden Warship's effect changes to: Penetration Rate +40%.
+  P5: Glory to the Jarl: Reality DMG increased to 600%.
+
+Eternity           | 6★  | Mineral     | Reality  | v1.8       | Aug. 8, 2024    | R:DMG   | DPS, Nasty Wound
+  P1: Anecdotes in Exeter: Reality DMG increased to 350%.
+  P2: Vigor Handbag: At Incantation rank 1/2/3, Reality DMG increased to 220/330/550%.
+  P3: Vintage Handfan's effect changes to: at 1/2/3 stars, deals 180/270/450% Reality DMG.
+  P4: Anecdotes in Exeter's effect changes to: Leech Rate +60%.
+  P5: Anecdotes in Exeter: Reality DMG increased to 400%.
+
+Everecho           | 6★  | Mineral     | Reality  | vCN 3.8    | CN Only         | R:ATK   | Heal, Support
+  P1: [Echoes' Embrace]: [Past Shadows] granted to all allies increases to +10 stacks. [Past Shadows] stack cap increased to 20. 2 [Light's Might] cards in the deck gain Chaotic Energy increased to 2.
+  P2: [Past Shadows]: DMG Bonus multiplier based on Everecho's ATK increased to 0.8%. Additional DMG Bonus per stack increased to +1.5%. 1 [Light's Might] card gains Chaotic Energy increased to 2.
+  P3: [Echoes' Embrace]: [Hollow Shell] Reality DEF reduction increased to -15%, Mental DEF reduction increased to -15%, Critical DEF reduction increased to -15%.
+  P4: [Lingering Here]: HP restored to all allies increased to 35% of self [Remembrance]. [Tomorrow's Hope] HP restored increased to Everecho's ATK * 240%.
+  P5: [Past Shadows]: DMG Bonus multiplier based on Everecho's ATK increased to 1.2%. Additional DMG Bonus per stack increased to +2%. 2 [Chaotic Energy II] cards in the deck gain Chaotic Energy increased to 3.
+
+Ezio Auditore      | 6★  | Star        | Reality  | vCollab    | Aug. 7, 2025    | R:DMG   | Assassination, DPS, Riposte
+  P1: [The Three Tenets]: When triggering an [Assassination] in the [Master Assassin] status, for every 100 points of Critical Technique the attacker has more than the target, gain Final DMG Dealt +10%. When casting [Branding of Faith], [Arrow of Faith] and [Edge of Faith] can be cast up to 4 times.
+  P2: Enhance Weapon Effects: Enhanced Venetian Falchion, Enhanced Condottiero War Hammer, Enhanced Captain's Sword.
+  P3: [The Three Tenets]: When triggering an Assassination in the [Master Assassin] status, for every 100 points of Critical Technique the attacker has more than the target, gain Final DMG Dealt +11%. When casting rank 1/2/3 [Work in the Dark], deal 460/675/1125% Reality DMG. When casting [Branding of Faith], [Arrow of Faith]/[Edge of Faith] deal 140%/140% Reality DMG.
+  P4: [The Three Tenets]: When triggering an Assassination in the [Master Assassin] status, for every 100 points of Critical Technique the attacker has more than the target, gain Final DMG Dealt +12%. [Serve the Light]: When being attacked in the Counter Kill status, ripostes to deal 600% Reality DMG; when other allies are being attacked, ripostes to deal 600% Reality DMG. When casting [Branding of Faith], [Death Be Not Unkind] deals 900% Reality DMG.
+  P5: Enhance Weapon Combination Effects: Enhanced Venetian Falchion, Enhanced Condottiero War Hammer, Enhanced Captain's Sword.
+
+Ezra               | 6★  | Star        | Mental   | v1.5       | Apr. 18, 2024   | R:ATK   | Support, Shield, Debuff
+  P1: Fungus Ecosystem Machine: When entering battle, additional Eureka +2; Each mushroom's recovery amount is increased to 12% of own Lost HP.
+  P2: Protection to the Body: At incantation rank 1/2, the HP loss effect is reduced to 10% of current HP. The [Vulnerability] inflicted by [Honey Fungus] increases to 3 stacks.
+  P3: Stimulus to the Mind: At Incantation rank 1/2/3, the [Shield] granted to all allies is increased to (Own HP x20%/25%/35%).
+  P4: Protection to the Body: At Incantation rank 1/2/3, The inflicted Genesis DMG is increased to (Own HP x20%/25%/35%).
+  P5: Stimulus to the Mind: At incantation rank 1/2, the HP loss effect is reduced to 10% of current HP. The [Discernment] inflicted by [Ghost Fungus] is increased to 3 stacks.
+
+Fatutu             | 6★  | Mineral     | Mental   | v2.4       | Mar. 27, 2025   | R:ATK   | Heal, Dispeller, Extra Action
+  P1: Shell Necklace: When entering battle, the additional stacks of [Spirit Shell] gained for self is increased to 8.
+  P2: Shell Necklace: The number of times required to trigger [Unmendable Cracks] from deploying or retrieving [Spirit Shell] is decreased to 5.
+  P3: Unmendable Cracks: At incantation rank 1/2/3, the Mental DMG dealt is increased to 180%/270%/450%; the deployed stacks of [Spirit Shell] is increased to 4; and when deploying [Spirit Shell], the chance to gain Moxie is increased to 25%.
+  P4: Ocean in the Shell: The stacks of [Shared Shells, Shared Fate] granted to all allies is increased to 4/6/10; and when retrieving [Spirit Shell], the healing factor is increased to 40%.
+  P5: Shell Necklace: When being attacked with an extra action, for each stack of [Spirit Shell] held, that attack's DMG Dealt increase is now 6%, and the Critical DMG increase is now 6%.
+
+Flutterpage        | 6★  | Star        | Reality  | v2.3       | Feb. 20, 2025   | R:DMG   | DPS, Support, Extra Action
+  P1: Cotton Kite: At incantation rank 1/2/3, Reality DMG is increased to 150%/225%/375%. The duration of [Continuous Action I] is increased to 2 rounds.
+  P2: "I Can Fly": [Paper Parade], [Wave of Sheets], and [Adieu, Mother Earth]'s added damage is increased to 18%/18% when attacking and to 18%/18% when performing an extra action.
+  P3: "I Can Fly": When entering battle, the Moxie granted to self is increased to 3, and the stacks of [Gust] gained is increased to 20. For each stack of [Gust] Flutterpage has, the DMG Dealt and Genesis DMG granted by [Wave of Sheets] and [Adieu, Mother Earth] are increased to 2.5%.
+  P4: "I Can Fly": [Paper Parade], [Wave of Sheets], and [Adieu, Mother Earth]'s added damage is increased to 23%/23% when attacking and to 23%/23% when performing an extra action.
+  P5: A Dream That Never Grows Old: [Regards from the Sky]'s Reality DMG is increased to 60%/60%. When [A Dream That Never Grows Old]'s channel status ends, the Moxie granted to self is increased to 2/3/4.
+
+Getian             | 6★  | Beast       | Reality  | v1.6       | May 30, 2024    | R:ATK   | Support, Debuff, DPS
+  P1: I Shall Walk, Exist, and Know: +1 round duration to [A Prophecy Told].
+  P2: Bone Interpretor: Now triggers with 2+ Reality DMG allies, and Moxie gained is increased to +4. When in [A Prophecy Told], [Admonition]'s Critical Rate and Critical DMG increase are now +30%.
+  P3: Unique Bearing: [Admonition]'s Reality DMG dealt is increased to 150%.
+  P4: Old Bones: At rank 1 incantation, Reality DMG dealt is increased to 160%.
+  P5: Bone Interpretor: When in [A Prophecy Told], [Admonition]'s Critical Rate and Critical DMG increase are now +50%.
+
+Hissabeth          | 6★  | Plant       | Mental   | v2.7       | Jul. 3, 2025    | R:DMG   | DPS, Control, Moxie
+  P1: Eternally Inquisitive: At the start of the round, if holding at least 1 stack of [Snake's Den] on self, consume 1 stack of [Snake's Den] and generate a copy of rank 1 [Hiss!]; this effect can now trigger up to 2 times per round. [Hiss!]'s Mental DMG is increased to 75%/150%/375%.
+  P2: Eternally Inquisitive: When attacking an enemy that's holding [Serpentine Scales], Hissabeth inflicts [Rigidity] on the enemy and gains 1 additional Moxie; this effect can now trigger up to 2 times per round.
+  P3: After casting Experimental Rocketry, the Genesis DMG taken from each stack of [Serpentine Scales] resolved at the end of the same round is increased to 100%.
+  P4: Experimental Rocketry's effect changes to: deals 750% Mental DMG.
+  P5: After casting Experimental Rocketry, the Genesis DMG taken from each stack of [Serpentine Scales] resolved at the end of the same round is increased to 130%.
+
+Horropedia         | 5★  | Mineral     | Mental   | v1.2       | Dec. 7, 2023    | R:DMG   | DPS, Dispeller, Debuff
+  P1: Twin's Play's effect changes to: deals 350% Mental DMG.
+  P2: Logic Dictates's effect changes to: at 1/2/3 stars, deals 220/280/500% Mental DMG.
+  P3: Twin's Play: Mental DMG increased to 400%.
+  P4: Sideshow: When at Incantation Rank 1/2/3, Mental DMG dealt increases to 180/270/450%.
+  P5: Twin's Play: Additionally inflicts 1 stack of [Scared] on the target.
+
+Igor               | 6★  | Beast       | Reality  | v3.3       | Mar. 5, 2026    | R:DMG   | DPS
+  P1: [Gryphon Army]: Each stack of [Shrapnel] now causes [Galloping Across the Underworld] to deal an additional +45% Reality DMG. In addition, when [Gryphon Army] allies cast their Ultimate, Igor gains +2 Moxie.
+  P2: [War Simulation]: Increases the additional stacks of [Shrapnel] inflicted on the main target to +14% of the total. Raises the maximum stacks of [Shrapnel] to 120.
+  P3: [Night's Command]: Now gains 3 types of [Bullet]s from the [Arsenal]. In addition, [Galloping Across the Underworld] now deals 1150% Reality DMG to all enemies, and an additional 1150% Reality DMG to the primary target.
+  P4: [Undying Light]: At rank 1/2/3, inflicts 8/10/12 stacks of [Shrapnel] and the maximum amount of stacks is increased to 140. In addition, [Galloping Across the Underworld] gains +11% Ultimate Might for each type of [Bullet] in possession.
+  P5: [Precognition]: The minimum Moxie Cost to cast Ultimate at the end of the round is reduced to 6. In addition, [Galloping Across the Underworld] now deals 1200% Reality DMG to all enemies, and an additional 1200% Reality DMG to the primary target.
+
+Isolde             | 6★  | Spirit      | Reality  | v1.7       | Jul. 11, 2024   | R:ATK   | Support, DPS, Burn
+  P1: Twilight Procession: [Pyre]'s Reality DMG is increased to 300%. If the target is in [Burn], then the additional Reality DMG is increased to 200%.
+  P2: Twilight Procession: [Pyre]'s Reality DMG is increased to 350%. If the target is in [Burn], then the additional Reality DMG is increased to 250%.
+  P3: Smoke and Flames: At incantation rank 1/2/3, Reality DMG dealt is increased to 175%/260%/450%.
+  P4: Twilight Procession: [Pyre]'s Reality DMG is increased to 400%. If the target is in [Burn], then the additional Reality DMG is increased to 300%.
+  P5: Smoke and Flames: [Burn] DMG dealt is increased to +40%. At the end of each round, if the target is in [Burn], deals additional Reality DMG equal to 200% of [Burn]'s DMG.
+
+J                  | 6★  | Beast       | Reality  | v2.0       | Oct. 31, 2024   | R:ATK   | DPS, Shield, Riposte
+  P1: Heat Treating: [Tempering] now deals 40% Reality DMG. For every 10% Missing HP on self, now deals an additional 15% Reality DMG.
+  P2: Bodily Furnace: Now gain an ATK percentage equal to 1.0x the number of [Burn] stacks on self.
+  P3: Bodily Furnace: The [Burn] stack limit on self is increased to 45 stacks.
+  P4: Over the Haight Street!: Reality DMG increased to 450%. For every excess [Burn] stack on the main target, this attack now deals an additional 15% Reality DMG.
+  P5: Bodily Furnace: Now gain an ATK percentage equal to 1.5x the number of [Burn] stacks on self.
+
+Jessica            | 6★  | Plant       | Reality  | v1.2       | Dec. 7, 2023    | R:DMG   | Poison, DPS
+  P1: Gaze From the Forest: Reality DMG increased to 425%.
+  P2: Changeling: When entering battle and at the start of every 3rd round, [Poison] inflicted on enemies +1 round.
+  P3: White Blankie: At Incantation rank 1/2/3, Reality DMG increased to 200/300/500%.
+  P4: Good Friends: At Incantation rank 1/2/3, if the target is afflicted with [Stats Down], [Neg Status] or [Control], Reality DMG increased to 50/75/125%.
+  P5: Gaze From the Forest: Reality DMG increased to 500%.
+
+Jiu Niangzi        | 6★  | Mineral     | Reality  | v1.6       | May 30, 2024    | R:DMG   | DPS, Burst DMG, Extra Action
+  P1: Baijiu and Mayhem: Reality DMG dealt is increased to 400%. Extra Reality DMG dealt is increased to +150% for each missing enemy (up to +300%).
+  P2: Bottoms Up: For each stack of [Liquor] consumed, Reality DMG dealt is increased to +90%.
+  P3: Contemplation: Random [Collection of Buffs] effects granted to self is increased to 2 types.
+  P4: Bottoms Up: Maximum stacks of [Liquor] consumed is increased to 4, and chance to consume 1/2/3/4 stacks of [Liquor] is increased to 5%/15%/40%/40%.
+  P5: Contemplation: [Collection of Buffs]'s effects are increased to +25% each. At the end of the round, now for every 3 different types of statuses possessed, grant 1 stack of [Liquor] to self (can now gain up to 5 stacks).
+
+John Titor         | 3★  | Intellect   | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Support, Dispeller, Purify
+  P1: 65,536 Bytes's effect changes to: inflicts a [Shield] with (the caster's ATK x130%) HP on all allies.
+  P2: Not a Decoration!': At Incantation rank 1/2/3, Reality DMG increased to 220/330/550%.
+  P3: 65,536 Bytes's effect changes to: inflicts a [Shield] with (the caster's ATK x160%) HP on all allies.
+  P4: A True Genius!'s effect changes to: at 1/2/3 stars, DMG Dealt +25/30/40% for the caster.
+  P5: 65,536 Bytes's effect changes to: inflicts a [Shield] with (the caster's ATK x200%) HP on all allies.
+
+Kaalaa Baunaa      | 6★  | Mineral     | Mental   | v1.3       | Jan. 18, 2024   | R:CRIT  | DPS, Burst DMG, Follow-up Attack
+  P1: Cosmic Wheel: Mental DMG dealt is increased to 600%. After removing all [Planet], deals additional 600% Mental DMG and gains 2 planets of [Full Moon] that grant Incantation Might +8% each.
+  P2: Planet-Splitting Fist: At incantation rank 1/2/3, Mental DMG dealt is increased to 220/330/550%.
+  P3: Cosmic Wheel: Mental DMG dealt is increased to 700%.
+  P4: Planet-Splitting Fist: At incantation rank 1/2/3, Mental DMG dealt is increased to 240/360/600%. [Divination] corresponding to the [Planet] removed now grants Penetration Rate +12%, Leech Rate +12%, and Incantation Might +12%.
+  P5: Cosmic Wheel: Mental DMG dealt is increased to 800%. After removing all [Planet], deals additional 800% Mental DMG.
+
+Kakania            | 6★  | Plant       | Mental   | v1.9       | Sep. 19, 2024   | R:ATK   | Support, DEF, Burst DMG
+  P1: Association: [Solace]'s ATK bonus is increased to 400, and the additional ATK bonus based on [Empathy] value is increased to 13%.
+  P2: Psychoanalysis: The threshold for [Empathy] to trigger healing is decreased from 3% HP to 2% HP. When healed, the Genesis DMG dealt is increased to (current [Empathy] value x120%).
+  P3: Psychoanalysis: [Empathy]'s maximum value is increased to 30% of Max HP. The percentage of damage taken that's converted to [Empathy] is changed to 15%.
+  P4: Subconscious: At rank 1/2/3, the Genesis DMG dealt is increased to (current [Empathy] value x270/310/350%).
+  P5: Id, Ego and Superego: The additional Genesis DMG dealt is increased to (current [Empathy] value x1300%); the Genesis DMG dealt at the end of the round is increased to (recorded value x45%).
+
+Kanjira            | 5★  | Plant       | Mental   | v2.8       | Sep. 19, 2025   | R:DMG   | DPS, Poison, Debuff
+  P1: Seasoned Wanderer's effect changes to: If the caster is in [Emerald Fortune] status, when casting [Hey, Punji!], inflicts [Poison] status with +1 round of duration.
+  P2: Oh, Divination!'s effect changes to: at 1/2/3 stars, deals 220/330/550% Mental DMG.
+  P3: Seasoned Wanderer's effect changes to: if the caster is in [Agate Fortune] status, when casting [Song of Wandering], Ultimate Might +15%.
+  P4: Hey, Punji!'s effect changes to: at Incantation rank 1/2/3, Mental DMG increased to 170/280/500%.
+  P5: Song of Wandering's effect changes to: deals 350% Mental DMG.
+
+Kassandra          | 6★  | Mineral     | Reality  | vCollab    | Aug. 7, 2025    | R:DMG   | Assassination, DPS, Support
+  P1: [Falconer's Instinct]: At the start of the round, gains Adrenaline +2. [Fury of Ares]: At rank 1/2/3, deals 150/225/375% Reality DMG. [Advent of Artemis]: At rank 1/2/3, deals 240/360/600% Reality DMG.
+  P2: [Way of Artemis]: Each stack of [Guidance of Three Gods] provides Critical DMG +9.3%, and an additional Critical DMG +9.3% for [Assassination] characters. [Way of Ares]: Each stack provides DMG Bonus +4.8%, and an additional DMG Bonus +4.8% for [Assassination] characters. [Way of Nyx]: Each stack provides ATK +2.8%, and an additional ATK +2.8% for [Assassination] characters.
+  P3: [Sparta Kick]: Deal 300% Reality DMG. [Rain of Destruction]: Deal 700% Reality DMG. [Rush Assassination]: Deal 1250% Reality DMG. [Rush Assassination - Combo]: Deal 1250% Reality DMG.
+  P4: [Way of Artemis]: Provides Critical Rate +24%, and an additional Critical Rate +16% for [Assassination] characters. [Way of Ares]: Provides Incantation Might +30%, and an additional Incantation Might +20% for [Assassination] characters. [Way of Nyx]: Provides Penetration Rate +42%, and an additional Penetration Rate +28% for [Assassination] characters.
+  P5: [Sixth Sense]: When an ally triggers [Assassination], deal an additional 125% DMG. [Weapons Master]/[Kick Gash]/[Arrow Gash]/[Assassination Gash]: deal 20% Genesis DMG. [Shadow Assassin]: When triggering an [Assassination], for every 100 points of Critical Technique Kassandra has more than the target, this attack gains Final DMG Dealt +4%.
+
+Kiperina           | 6★  | Star        | Reality  | v2.7       | Jul. 3, 2025    | R:ATK   | Shield, Support, Dispeller
+  P1: Child of Dawn: When [Auroral Corona] is at 1+ stacks, the DMG bonus granted to all allies is increased to +15%. When [Auroral Corona] is at 20 stacks, [Impromptu Incantation]'s excess Critical Rate is now converted into Critical DMG at a 75% rate.
+  P2: For Everyone: For every 600 Shield HP from this effect held on an ally, the Critical Rate gained is increased to +2, and the DMG Bonus gained is increased to +1.5%.
+  P3: For Everyone: At incantation rank 1/2/3, the [Shield] granted to all allies is increased to (Kiperina's ATK x180%/270%/450%) HP.
+  P4: For Everyone: When actively cast, the additional Shield Factor is increased to 70%/105%/175%.
+  P5: Child of Dawn: When [Auroral Corona] is at 1+ stacks, the DMG bonus granted to all allies is increased to +20%. When [Auroral Corona] is at 20 stacks, [Impromptu Incantation]'s excess Critical Rate is now converted into Critical DMG at a 100% rate.
+
+La Source          | 3★  | Plant       | Mental   | v2.0       | Oct. 31, 2024   | R:ATK   | Heal
+  P1: Another Version of the Legend's effect changes to: additionally Moxie -1.
+  P2: "Spring Elfin"'s effect changes to: at 1/2/3 stars, deals 165/245/400% Mental DMG.
+  P3: Another Version of the Legend's effect changes to: additionally Moxie -1.
+  P4: Spring Elfin's effect changes to: at 1/2/3 stars, HP +(the caster's ATK x90/135/220%) for all allies.
+  P5: Another Version of the Legend's effect changes to: additionally Moxie -1.
+
+Leilani            | 3★  | Beast       | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Support, DPS
+  P1: Hawaiian Archery's effect changes to: additionally Moxie +1.
+  P2: A Greeting's effect changes to: additionally deals 65/95/160% Reality DMG to enemies in [Stats Down], [Neg Status], or [Control].
+  P3: Hawaiian Archery: Reality DMG increased to 350%.
+  P4: Check Carefully's effect changes to: additionally deals 85/125/210% Reality DMG to enemies with HP below 50%.
+  P5: Hawaiian Archery: Reality DMG increased to 400%.
+
+Liang Yue          | 6★  | Star        | Reality  | v2.5       | Apr. 24, 2025   | R:DMG   | DPS, Extra Action, Immunity
+  P1: Call of Thunder: #0305: [Qiangliang Complete]'s duration is extended to 4 rounds, and the size of each enhancement section in the Spelldock is increased to 4.
+  P2: Destined Inheritor: When entering battle, the Moxie gained for self is increased to 5. The number of [Justice Talon] and or [Peace Talon] required for [Bane of All Evil] is decreased to 5.
+  P3: Call of Thunder: #0305: The [Immunity] duration is increased to 2 rounds. The stacks of [Guardian's Resolve] granted is increased to 12.
+  P4: Banish Evil: At incantation rank 1/2/3, the Reality DMG is increased to 240/360/600% and the Penetration Rate is increased to 0/40/100%. [Guardian's Resolve]'s stack limit is increased to 40, and each stack's DMG Taken Reduction is boosted to -1%.
+  P5: Destined Inheritor: [Bane of All Evil - Justice]'s Reality DMG is increased to 600%; for every [Justice Talon] consumed, the Critical DMG bonus is increased to 30%. [Bane of All Evil - Peace]'s Reality DMG is increased to 600%; for every instance of [Poison] on the target, the DMG Dealt is increased to 20%. [Bane of All Evil - Balance]'s Reality DMG is increased to 300%; [Swift Resolve]'s stack limit is increased to 3, and for each stack of [Swift Resolve], [Bane of All Evil - Balance]'s additional Reality DMG is increased to 80%.
+
+Lilya              | 6★  | Star        | Reality  | v1.2       | Dec. 7, 2023    | R:CRIT  | Burst DMG, DPS
+  P1: A Small Trick's effect changes to: deals 775% Reality DMG.
+  P2: Aerial Maneuvers effect changes to: at 1/2/3 stars, deals 165/245/400% Reality DMG.
+  P3: Crosswind Takeoff's effect changes to: at 1/2/3 stars, deals 180/270/450% Reality DMG.
+  P4: A Small Trick's effect changes to: 25% Leech Rate on a critical hit.
+  P5: A Small Trick's effect changes to: deals 850% Reality DMG.
+
+Loggerhead         | 5★  | Plant       | Mental   | v2.5       | Apr. 24, 2025   | R:ATK   | Heal, DEF, Support
+  P1: Cinema Binge: Mental DMG increased to 450%.
+  P2: A Must-See!: At incantation rank 1/2/3, deals 220/260/450% Mental DMG.
+  P3: "Keeper of Memories": The HP recovered for allies in the [Memory Replay] status is increased to 1.7% of their Max HP.
+  P4: A Must-See!: At incantation rank 1/2/3, the number of [Collection of Neg Status] effects inflicted on the target hit is increased to 3/3/3.
+  P5: A Mind-Blower!: The DMG Taken Reduction granted by [Memory Replay] is increased to 25%.
+
+Lopera             | 6★  | Beast       | Reality  | v2.2       | Jan. 9, 2025    | R:ATK   | Support, Burn, Extra Action
+  P1: More Than Alchemy: [Crucible Arsenal]'s Critical Rate is increased to 50%; when converting excess Critical Rate into Critical DMG, the base conversion rate is increased to 65%.
+  P2: Winning Chips: The number of [Flaming Bullet] granted is increased to 6/10/15. [Right on Target]'s Critical DMG multiplier is increased to 15%.
+  P3: More Than Alchemy: [Crucible Arsenal]'s duration is increased to 4 rounds.
+  P4: Winning Chips: [Bull's Eye]'s Reality DMG is increased to 250%.
+  P5: Double Backups: Reality DMG is increased to 230/345/575%, and [Incantation Bullet]'s and [Ritual Bullet]'s Incantation Might/Ultimate Might are increased to 35%/35%.
+
+Lorelei            | 5★  | Star        | Mental   | v1.9       | Sep. 19, 2024   | R:ATK   | Support, DPS
+  P1: A Drifting Song: The additional Mental DMG dealt from each attack-type incantation is increased to 40%.
+  P2: A Drifting Song: The Critical Rate gained from each buff-type incantation is increased to 20%.
+  P3: Melody of Hearts: The damage increase effect is increased to 20%.
+  P4: A Drifting Song: The Penetration Rate gained from each debuff-type incantation is increased to 30%.
+  P5: Melody of Hearts: The Critical Rate increase effect is increased to 20%.
+
+Lorentz Butterfly  | 6★  | Intellect   | Mental   | v3.1       | Dec. 11, 2025   | R:ATK   | Support, Lingering Glow, DPS, Rewrite
+  P1: The Unstable Dynamical System: [Continuous Action I] lasts for 2 rounds. At the end of the round, the additional Moxie gained from not casting Ultimate increases to +2. At the start of the round, if there are 1/2/3 [Lingering Glow] allies, grant +3/4/8% Incantation Might to them per 100 stacks of [Lingering Glow] (up to 600) for 1 round. The ratio of extra [Steady State Genesis DMG] dealt by [The Primer's Flutter] per 100 stacks of [Lingering Glow] is increased to +0.6/1.2%.
+  P2: The Unstable Dynamical System: Grants 4 copies of the printed Incantation. At the start of the round, if there are 1/2/3 [Lingering Glow] allies, grant +5.5/8/18% DMG Bonus to them per 100 stacks of [Lingering Glow] (up to 600) for 1 round.
+  P3: Chaos Criteria: [The Igniting Wingbeat] lasts for 3/3/4 rounds. At the start of the round, if there are 1/2/3 [Lingering Glow] allies, grant +5/6/10% Incantation Might to them per 100 stacks of [Lingering Glow] (up to 600) for 1 round.
+  P4: Aperiodic Flows: At the start of the round, if there are 1/2/3 [Lingering Glow] allies, grant +8.5/11/21% DMG Bonus to them per 100 stacks of [Lingering Glow] (up to 600) for 1 round.
+  P5: The Unstable Dynamical System: Grants 5 copies of the printed Incantation. The ratio of extra [Steady State Genesis DMG] dealt by [The Primer's Flutter] per 100 stacks of [Lingering Glow] is increased to +0.7/1.4%.
+
+Lucy               | 6★  | Intellect   | Reality  | v1.9       | Sep. 19, 2024   | R:DMG   | DPS, Reaper, Extra Action
+  P1: The First Push: [Conservation of Energy]'s Reality DMG is increased to 150%; now deals additional damage when the target's current HP is below 75%, and the additional DMG is increased to 100%.
+  P2: A Step Forward: [Pragmatist] and [Leadership]'s durations are increased to 3 rounds, and the Stronger Afflatus Damage Factor increase is now 20%.
+  P3: The First Push: [Data Iteration]'s ATK bonus is increased to 6%; and whenever an enemy dies, the stacks of [Data Iteration] gained is increased to 2.
+  P4: The First Push: [Conservation of Energy]'s Reality DMG is increased to 200%; the maximum number of times [Conservation of Energy] can trigger when enemies die is increased to 4 times per round.
+  P5: The First Push: [Data Iteration]'s ATK bonus is increased to 8%, and maximum stacks is increased to 6; and whenever an ally gains 1 Moxie or Eureka, the stacks of [Dynamo] gained is increased to 2.
+
+Marcus             | 6★  | Plant       | Mental   | v1.7       | Jul. 11, 2024   | R:DMG   | DPS, Burst DMG
+  P1: Read the Page: When entering battle, the Eureka gained is increased to 3.
+  P2: Read the Page: Now only costs 2 Eureka to upgrade incantations from rank 2 to rank 3.
+  P3: From the Lantern: At incantation rank 1/2/3, the Mental DMG is increased to 160/270/420%.
+  P4: Read the Page: At the start of the round, the Eureka gained is increased to 2.
+  P5: Reading Class: At incantation rank 1/2/3, the Mental DMG is increased to 230/380/520%.
+
+Marsha             | 6★  | Beast       | Reality  | v3.3       | Mar. 5, 2026    | R:DEF   | Shield, Support, Lingering Glow
+  P1: Humanitarian Aid: Upon entering combat, gain 3 Moxie instead. [Morning Prayer] now increases the maximum stacks of [Burn] on enemies +10. [Discipline Forged] Critical Rate +30% and 75% of excess Critical Rate is converted into Critical DMG.
+  P2: Advice to the Violent: now consumes up to 7 stacks of [Pain's Recompense] and the duration of [Discipline Forged] is increased to 4 rounds.
+  P3: Advice to the Violent: now deals 1000% Reality DMG and grants 2 stacks of [Pain's Recompense]. Each stack of [Discipline Forged] now increases Incantation Might +2%.
+  P4: Burden Unspoken: now grants all allies a [Shield] with HP equal to (the user's ATK x180/270/450%) for 3 rounds. When actively cast, it now consumes one stack of [Frontline Care] to increase the multiplier by 90/130/220% of Marsha's Critical Rate. Upon entering combat, Marsha grants all allies a [Shield] with (the user's ATK x180%) HP instead.
+  P5: Humanitarian Aid: If there are 3 [Lingering Glow] allies or more, when [Lingering Glow] is accumulated, further increase it by 14%. [Discipline Forged] now increases Critical Rate +40% and 100% of excess Critical Rate is converted into Critical DMG.
+
+Matilda            | 5★  | Star        | Mental   | v3.2       | Jan. 20, 2026   | R:ATK   | Debuff, DPS
+  P1: Instant of Prediction's effect changes to: this attack enjoys Critical Rate +23%.
+  P2: Work of Genius's effect changes to: at 1/2/3 stars, deals 220/280/500% Mental DMG.
+  P3: Instant of Prediction's effect changes to: this attack enjoys Critical Rate +31%.
+  P4: Attention Everyone's effect changes to: this attack enjoys Penetration Rate +40%.
+  P5: Instant of Prediction's effect changes to: this attack enjoys Critical Rate +39%.
+
+Medicine Pocket    | 6★  | Beast       | Mental   | v1.2       | Dec. 7, 2023    | R:ATK   | Heal, Debuff, Control
+  P1: Bell of the Forest: HP +(Medicine Pocket's ATK x120%) for all allies.
+  P2: Alchemy Ware: At Incantation rank 1/2/3, HP +(the caster's ATK x90/135/220%) for all allies.
+  P3: Inherent Habit: At incantation rank 1/2/3, Mental DMG increased to 170/280/500%.
+  P4: 26 Secondary Reactions: Mental DMG increased to 500%.
+  P5: Inherent Habit: DMG Taken increased to +30% for the target.
+
+Melania            | 6★  | Beast       | Mental   | v1.1       | Nov. 9, 2023    | R:DMG   | Burst DMG, DPS
+  P1: A Thousand Comrades: [Fixed Plan] stack limit increased to 12. Ultimate Might bonus increased to +12% per stack.
+  P2: Glorious Battle: At the start of the round, if self has [Fixed Plan], gains 1 Moxie.
+  P3: Born for the Battlefield: At rank 1/2/3, Mental DMG increased to 200/300/500%.
+  P4: A Thousand Comrades: [Fixed Plan] stack limit increased to 15. Ultimate Might bonus increased to +15% per stack.
+  P5: Glorious Battle: When self casts an Ultimate, all allies gain 2 stacks of [Fixed Plan].
+
+Mercuria           | 6★  | Spirit      | Mental   | v2.0       | Oct. 31, 2024   | R:ATK   | Support, DPS, Rank Up
+  P1: Lengthy Journey: At the end of the round, now if allies have cast two or more rank 2 incantations for that round, gain Moxie +1 for self.
+  P2: Lengthy Journey: Critical DMG increase is now +50% and Incantation Might increase is now +30%.
+  P3: Lengthy Journey: [Cosmic Energy]'s stack limit is increased to 30. The DMG Dealt granted by each stack is increased to +2.5%.
+  P4: Morning Star for the Night: Mental DMG is increased to 475%, and extends [Rank Up] by +1 round.
+  P5: Lengthy Journey: Extends [Cosmic Energy] by +1 round. The DMG Dealt granted by each stack is increased to +3%.
+
+Mesmer Jr.         | 4★  | Intellect   | Mental   | v2.2       | Jan. 9, 2025    | R:ATK   | Support
+  P1: Artificial Somnambulism Therapy's effect changes to: deals 225% Mental DMG.
+  P2: Magnetic Current's effect changes to: at 1/2/3 stars, deals 220/280/500% Mental DMG.
+  P3: Artificial Somnambulism Therapy's effect changes to: deals 250% Mental DMG.
+  P4: Artificial Somnambulism Therapy's effect changes to: deals 275% Mental DMG.
+  P5: Artificial Somnambulism Therapy's effect changes to: deals 325% Mental DMG.
+
+Moldir             | 6★  | Beast       | Reality  | v2.8       | Sep. 19, 2025   | R:ATK   | Support, Riposte, Moxie
+  P1: The Past Shattered: At incantation rank 1/2/3, Reality DMG is increased to 150/225/375%. The duration of [Continuous Action I] is increased to 2 rounds.
+  P2: To the "Family": [Tactical Coordination]'s Ultimate DMG is increased to 2.5%. [Armament Enhancement]'s Critical Rate is increased to 40%.
+  P3: To the "Family": After launching a riposte, Moxie gained is increased to +2.
+  P4: Astray No More: Reality DMG dealt is increased to 500%. The number of the stacks of [Ceremonious: Critical DMG] gained by all allies is increased to 8.
+  P5: Astray No More: When actively launched, additional Reality DMG dealt to all enemies is increased to 600%. [Doctrine]'s Ultimate Might is increased to 30%.
+
+Mondlicht          | 4★  | Mineral     | Reality  | v1.0       | Oct. 26, 2023   | R:DMG   | DPS
+  P1: More Deadly than the Big Bad Wolves: Reality DMG increased to 500%.
+  P2: A Silver Bullet's effect changes to: additionally deals Reality DMG when target's HP is above 40%.
+  P3: A Dance's effect changes to: additionally deals Reality DMG when the target's HP is below 60%.
+  P4: More Deadly than the Big Bad Wolves: Reality DMG increased to 550%.
+  P5: More Deadly than the Big Bad Wolves's effect changes to: deals 600% Reality DMG.
+
+Mr. Duncan         | 5★  | Beast       | Reality  | v2.2       | Jan. 9, 2025    | R:DMG   | DPS, Riposte, Reaper
+  P1: Lethal Melody: At incantation rank 1/2/3, the Genesis DMG is increased to 100/150/250%.
+  P2: A Veteran's Regards: For each type of [Bullet] held, the Critical Rate gained is increased to 20%.
+  P3: Lethal Melody: At incantation rank 1/2/3, the Reality DMG is increased to 120/180/300%.
+  P4: Makeshift Inventions: [Swift Riposte]'s Reality DMG dealt is increased to 300%.
+  P5: Military Experience: After defeating an enemy, the types of bullets gained from [Veteran's Cartridge] by all allies is increased to 2.
+
+Ms. Moissan        | 4★  | Mineral     | Reality  | v1.0       | Oct. 26, 2023   | R:DEF   | Control, Shield
+  P1: Unique Tool's effect changes to: deals 450% Reality DMG.
+  P2: Potter's effect changes to: at 1/2/3 stars, deals 220/280/500% Reality DMG.
+  P3: Unique Tools: Reality DMG increased to 500%.
+  P4: Mentor's effect changes to: at 1/2/3 stars, grants a [Shield] with (the caster's ATK x90/135/225%) HP on all allies.
+  P5: Unique Tools: Reality DMG increased to 550%.
+
+Ms. NewBabel       | 6★  | Mineral     | Reality  | v2.1       | Dec. 5, 2024    | R:DEF   | DEF, Shield, Riposte
+  P1: The Future Is Near's effect changes to: when [Fanged Partner] ripostes, deals 110% Reality DMG plus (Reality DEF x110%) Genesis DMG.
+  P2: Old Idea's effect changes to: at 1/2/3 stars, deals (the caster's Reality DEF x100/150/250%) Genesis DMG.
+  P3: The Future Is Near's effect changes to: when [Fanged Partner] ripostes, deals 120% Reality DMG plus (Reality DEF x120%) Genesis DMG.
+  P4: The Future Is Near's effect changes to: when [Fanged Partner] ripostes, deals 130% Reality DMG plus (Reality DEF x130%) Genesis DMG.
+  P5: A New Wave's effect changes to: at 1/2/3 stars, grants a [Shield] with (Ms. Newbabel's Reality DEF x170/250/410%) HP on all allies.
+
+Ms. Radio          | 2★  | Spirit      | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | Debuff
+  P1: A Bit of Truth Unveiled's effect changes to: deals 120% Mental DMG.
+  P2: BupDese: At Incantation rank 1/2/3, Mental DMG increased to 220/330/550%.
+  P3: A Bit of Truth Unveiled's effect changes to: deals 140% Mental DMG.
+  P4: LeEe Frequency's effect changes to: at 1/2/3 stars, deals 165/245/400% Mental DMG.
+  P5: A Bit of Truth Unveiled's effect changes to: deals 160% Mental DMG.
+
+Ms. Stranger       | 6★  | Mineral     | Mental   | vCN 3.7    | CN Only         | R:DMG   | DPS
+  P1: [Mask of the Lady]: For every 1 enemy whose Afflatus Guard is reduced to 0, [Last Piece of Herself] stacks granted increases to +2. [A Moth to a Flame] cast by [Silent Flutter] gains +3 stacks of each of the 4 Amplification types.
+  P2: [New Life]: [A Moth to a Flame] DMG Bonus increases to +60%. Penetration Rate of actively released [A Moth to a Flame] increases to +30%. [A Moth to a Flame] cast by [Silent Flutter] gains +4 stacks of each of the 4 Amplification types.
+  P3: [Phototaxis Instinct]: [Self-Deception] DMG Taken Reduction decreases -30%. Increases [A Moth to a Flame]'s Critical Rate/Critical DMG to +20%/40%.
+  P4: [Mask of the Lady]: Incantation Might/Ultimate Might coefficient affecting Ms. Stranger's own Incantations increases to 120%/120%.
+  P5: [Mask of the Lady]: Mental DMG dealt by [A Moth to a Flame] increases to 560%. Type 1 additional DMG increases to 140%/560%. Type 2 additional DMG increases to 420%. Type 3 Critical Rate/Ultimate Might increase to +10%/15%. Type 4 Critical DMG/Incantation Might increase to +15%/15%.
+
+Name Day           | 5★  | Mineral     | Mental   | v2.7       | Jul. 3, 2025    | R:ATK   | Support, DPS
+  P1: Circular Maneuvers: At incantation rank 1/2/3, deals 160%/240%/360% Mental DMG.
+  P2: As You Wish: At incantation rank 1/2/3, the DMG Dealt and DMG Heal bonuses are increased to 25%/30%/40%.
+  P3: Unforgettable Bonds: The amount of [Ceremonious] granted to the adjacent ally in front is increased to 3 stacks.
+  P4: Etched in Snow: The duration of [Enname] granted is extended to 3 rounds.
+  P5: Etched in Snow: Ultimate DMG bonus granted to all allies is increased to +65%.
+
+Nautika            | 6★  | Spirit      | Reality  | v2.8       | Sep. 19, 2025   | R:DMG   | DPS, Bloodtithe, Adaptive
+  P1: No Longer Poles Apart: When entering battle, [Bloodtithe]/[Max Bloodtithe] gained is increased to 16. [Higge]'s Max HP bonus is increased to +3%. The increased points of [Bloodtithe] required to cast [Mouth of the Mother] is reduced to 6.
+  P2: Divine Yoik: During [Blood Sacrifice], the required points of [Bloodtithe] consumed to gain [Blood Sacrifice] points is reduced to 7. [Blood Sacrifice]'s point limit is increased to 27. The percentage of own Max HP replacing every [A Thousand Scars]'s ATK is increased to x27.5% and for every point of [Blood Sacrifice], Max HP is increased to +10%. The percentage of own Max HP replacing [A Thousand Springs]'s ATK is increased to x50% and Max HP is increased to +30%.
+  P3: No Longer Poles Apart: [Mother Spirit's Guidance]'s Healing Taken is changed to +20%. For every 10% HP lost, Healing Taken is changed to +7.5%, up to 60%. [Mouth of the Mother]'s HP loss is increased to 30% of current HP. The percentage of own Max HP replacing ATK is increased to x25%.
+  P4: Gates of Horn and Ivory: At Incantation rank 1/2/3, [Martyr of the Abyss]'s percentage of own Max HP replacing ATK is increased to 20/30/50%. At incantation rank 1/2/3, [Weaver of Light]'s DMG Taken Reduction is changed to +20/25/40% and the duration is increased to 4 rounds. The duration of [Mother Spirit's Guidance] is increased to 4 rounds.
+  P5: Divine Yoik: During [Blood Sacrifice], the required points of [Bloodtithe] consumed to gain [Blood Sacrifice] is reduced to 6. [Blood Sacrifice]'s point limit is increased to 30. The percentage of Max HP replacing ATK for every [A Thousand Scars] attack is increased to x35%.
+
+Necrologist        | 5★  | Mineral     | Mental   | v3.1       | Dec. 11, 2025   | R:ATK   | Support, DPS
+  P1: Whispers of the Deceased's effect changes to: DMG Dealt +40% for other allies.
+  P2: Timely Farewell effect changes to: Penetration Rate +40%.
+  P3: Whispers of the Deceased's effect changes to: if target already has active [Prayer], HP +(the caster's ATK x 150%).
+  P4: By the Coffin's effect changes to: at 1/2/3 stars, deals 220/280/500% Mental DMG.
+  P5: Whispers of the Deceased's effect changes to: DMG Dealt +50% for other allies.
+
+Nick Bottom        | 4★  | Beast       | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | Support
+  P1: Forest Eulogy's effect changes to: grants a [Shield] with (the user's Missing HP x125%) HP for all allies.
+  P2: Wild Rose's effect changes to: at 1/2/3 stars, deals 220/280/450% Mental DMG.
+  P3: Midsummer Vine's effect changes to: at 1/2/3 stars, Reality DEF, Mental DEF, and DMG Taken Reduction +30/35/40%.
+  P4: Forest Eulogy's effect changes to: grants a [Shield] with (the user's Missing HP x150%) HP for all allies.
+  P5: Forest Eulogy's effect changes to: grants a [Shield] with (the user's Missing HP x175%) HP for all allies.
+
+Noire              | 6★  | Plant       | Mental   | v2.5       | Apr. 24, 2025   | R:DMG   | DPS, Burst DMG, Extra Action
+  P1: Climatic Moment: For each stack of [Genius Idea] held, the chance to recast the ultimate is increased to 10%.
+  P2: Climatic Moment: When recasting the ultimate, the number of stacks of [Genius Idea] consumed is decreased to 4.
+  P3: Miniature Set: [Genius Idea]'s stack limit is increased to 12.
+  P4: Climatic Moment: For each type/stack of [Neg Status] on the target, the Mental DMG/Penetration Rate are increased to 120%/4%, up to a maximum of 600%/40%.
+  P5: Climatic Moment's effect changes to: deals 550% Mental DMG.
+
+Oliver Fog         | 4★  | Star        | Reality  | v1.4       | Feb. 29, 2024   | R:DEF   | DEF, Support
+  P1: Meaningless as Expected: Reality DMG increased to 500%.
+  P2: Working Hours effect changes to: this attack enjoys Leech Rate +50%.
+  P3: Meaningless as Expected effect changes to: Penetration Rate +40%.
+  P4: Home of the Fog [Shield] Effect changes to: shield DMG of lost HP x200%.
+  P5: Meaningless as Expected effect changes to: Penetration Rate +50%.
+
+ONiON              | 3★  | Mineral     | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | DPS, Support
+  P1: Frequent Phenomena's effect changes to: deals 300% Reality DMG.
+  P2: Not Fake News's effect changes to: at 1/2/3 stars, additionally deals 65%/95%/160% Reality DMG to enemies in [Stats Down], [Neg Status] or [Control].
+  P3: Frequent Phenomena's effect changes to: Reality DMG increased to 350%.
+  P4: Just A Show's effect changes to: additionally deals Reality DMG when the target's HP is below 60%.
+  P5: Frequent Phenomena's effect changes to: Reality DMG increased to 400%.
+
+Paper Heron        | 6★  | Plant       | Reality  | v3.4       | Apr. 16, 2026   | R:DMG   | DPS, Inspiration
+  P1: [Eight Winds in Harmony]: When there are 2/1 enemies, [Impromptu Incantation] deals +50/100% additional Reality DMG. When [Qi Panorama] is active, [Impromptu Incantation] deals +250% additional Reality DMG and at [Glimpse of Tao III], [Impromptu Incantation] deals +250% additional Reality DMG.
+  P2: [Eight Winds Harmony]: While [Qi Panorama] is active, [Impromptu Incantation] can attack up to 4 times per round; excess attacks are converted into an additional +250% Reality DMG (up to a maximum of 4 times).
+  P3: [Eight Winds Harmony]: While [Qi Panorama] is active, increase DMG Dealt of [Impromptu Incantation] by +25%, and deal +50/100% Reality DMG when there are 2/1 targets. At [Glimpse of Tao III], deal +50/100% Reality DMG when there are 2/1 targets, and increase [Impromptu Incantation]'s Penetration Rate by +20%.
+  P4: [Shaper of Qi]: Increases [Impromptu Incantation]'s attacks by 2. [Auspicious Wind] increases DMG Dealt and Incantation Might by +35%.
+  P5: [Eight Winds Harmony]: While [Qi Panorama] is active, [Impromptu Incantation] can attack up to 5 times per round; excess attacks are converted into an additional +300% Reality DMG (up to a maximum of 5 times).
+
+Pavia              | 4★  | Beast       | Mental   | v1.0       | Oct. 26, 2023   | R:DMG   | DPS, Self-healing
+  P1: Noisier Than Me's effect changes to: deals 475% Mental DMG.
+  P2: Dirty Thing's effect changes to: at 1/2/3 stars, additionally deals 65/95/155% Mental DMG.
+  P3: Poor Sod's effect changes to: at 1/2/3 stars, additionally deals 55/80/130% Mental DMG.
+  P4: Noisier Than Me's effect changes to: deals 550% Mental DMG.
+  P5: Noisier Than Me's effect changes to: Deals 600% Mental DMG. The [Self-healing] status now recovers (the user's Missing HP x35%) HP.
+
+Pickles            | 6★  | Mineral     | Mental   | v1.1       | Nov. 9, 2023    | R:DMG   | DPS, Support, Dispeller
+  P1: Thus Spoke Pickles: Mental DMG is raised to 575%.
+  P2: Thus Spoke Pickles's effect changes to: DMG Dealt +40% to all allies.
+  P3: Nihilism Abuse's effect changes to: at 1/2/3 stars, if the caster is in [Clarified Topic] status, additional Mental DMG dealt is increased to 80/120/200%.
+  P4: Hedonism Implement's effect changes to: at 1/2/3 stars, Mental DMG dealt is increased to 165/170/325%.
+  P5: Thus Spoke Pickles's effect changes to: deals 650% Mental DMG.
+
+Pioneer            | 3★  | Spirit      | Mental   | v2.0       | Oct. 31, 2024   | R:ATK   | Support, Shield, Shift
+  P1: Competitive Differentiation: Mental DMG is increased to 230/350/570%.
+  P2: To Future Business: The Reality DEF and Mental DEF are increased to 30%/35%/40%.
+  P3: Bridge the Gap: The Shield granted is increased to (Max HP x70%) HP.
+  P4: Roving Salesman: [Promotional Package]'s DMG Bonus and DMG Reduction are increased to 25%.
+  P5: Roving Salesman: [Hot Deal]'s Critical Rate and Critical DMG are increased to 30%.
+
+Poltergeist        | 4★  | Spirit      | Mental   | v1.0       | Oct. 26, 2023   | R:DEF   | DEF, Debuff
+  P1: The Sun Is Not Gentle's effect changes to: DMG Heal Rate +35%.
+  P2: Prank's effect changes to: Penetration Rate +40%.
+  P3: The Sun Is Not Gentle's effect changes to: DMG Taken -30%.
+  P4: Whispering Words's effect changes to: at 1/2/3 stars, deals 220/230/400% Mental DMG.
+  P5: The Sun Is Not Gentle's effect changes to: DMG Heal Rate +50%.
+
+Rabies             | 4★  | Plant       | Reality  | v1.0       | Oct. 26, 2023   | R:DMG   | DPS, Poison
+  P1: Dedicated Straw Doctor's effect changes to: deals 300% Reality DMG.
+  P2: Rabies's effect changes to: at 1/2/3 stars, additionally deals 65/95/160% Reality DMG to enemies in [Stats Down], [Neg Status] or [Control].
+  P3: Dedicated Straw Doctor's effect changes to: this attack enjoys Penetration Rate +40%.
+  P4: Noise in the Field's effect changes to: additionally deals Reality DMG when the target's HP is above 40%.
+  P5: Dedicated Straw Doctor's effect changes to: this attack enjoys Penetration Rate +50%.
+
+Ramona             | 6★  | Plant       | Mental   | vUnknown   | Unknown         | R:DMG   | DPS, Poison, Rewrite
+  P1: [Clear Shadows]: Upon entering combat, gain +3 Moxie. [Marigold Method] deals 400% Mental DMG and inflicts 2 stacks of [Poison] and [Spirit Repellent].
+  P2: [Return Peaceful Slumber to Both Worlds]: At the end of the round, deals (converted [Poison] stacks * ATK * 75%) Genesis DMG to the carrier. For every round [Expellant] exists, damage increases by +35%. At end of duration, deals (duration * ATK * 550%) Genesis DMG. [Efficient Exorcist] lasts for 3 rounds.
+  P3: [Clear Shadows]: Both [Purifying Incense] and [Ghost-Be-Gone] inflict 2 stacks of [Poison]. Ramona's [Poison] deals (ATK * 50%) Genesis DMG.
+  P4: [Ghost-Be-Gone]: [Poison] resolution deals 140/165/200% of standard [Poison] DMG. At end of duration, [Expellant] deals (duration * ATK * 750%) Genesis DMG.
+  P5: [Return Peaceful Slumber to Both Worlds]: At end of round, deals (converted [Poison] stacks * ATK * 100%) Genesis DMG. Damage per round increases by +45%. At start of round, gain 2 stacks of [Exorcist-For-Hire]. Max stacks of [Spirit Repellent] increases to 8.
+
+Recoleta           | 6★  | Mineral     | Reality  | v2.6       | May 29, 2025    | R:DMG   | DPS, Burst DMG, Moxie
+  P1: Spontaneous Writing: When casting an ultimate, the maximum stack limit of [Preparation · Recoleta] is increased to 2.
+  P2: Maze of Visceral Realism: The additional Reality DMG dealt by consuming [Monomythic Narrative]/[Ensemble Narrative] is increased to 70%/35%.
+  P3: Maze of Visceral Realism: The Reality DMG dealt is increased to 550%/550%.
+  P4: Literary Imagery: At incantation rank 1/2/3, the Reality DMG dealt is increased to 150%/225%/375%, and the stacks of [Monomythic Narrative]/[Ensemble Narrative] gained are increased to 10.
+  P5: Maze of Visceral Realism: The Reality DMG dealt is increased to 650%/650%, and for each additional Moxie consumed, the Ultimate Might bonus is increased to +6%.
+
+Reed               | 4★  | Plant       | Mental   | v3.4       | Apr. 16, 2026   | R:ATK   | Support
+  P1: [New Experience]: Deals 220/330/540% Mental DMG.
+  P2: [Wither and Bloom IV]: +30% DMG Dealt.
+  P3: [A Reed's Knowledge]: Grants current stage of [Wither and Bloom] to all allies for 4 rounds.
+  P4: [Revive In Spring Wind]: Upon entering combat, gain 2 Moxie.
+  P5: [Wither and Bloom IV]: +25% Critical Rate, +40% Critical DMG.
+
+Regulus            | 6★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:CRIT  | DPS, Support
+  P1: Sleepless Rave: Mental DMG increased to 400%.
+  P2: Treat for the Ears: At Incantation rank 1/2/3, Mental DMG increased to 220/330/550%.
+  P3: Challenge for the Eyes: At Incantation rank 1/2/3, Mental DMG increased to 165/195/300%.
+  P4: Sleepless Rave: Mental DMG increased to 450%.
+  P5: Sleepless Rave: [Riot and Roll] +1 round for all allies.
+
+Rhiannon           | 6★  | Beast       | Mental   | vCN 3.7    | CN Only         | R:ATK   | Support
+  P1: [The Eagle-Taming Witch]: Upon entering combat, gain +5 Moxie. [Flocksong] increases Incantation Might and Ultimate Might by +45%.
+  P2: [The Eagle-Taming Witch]: Upon entering combat, funnel 85% energy into [Raptor Kinship]. Upon consuming [Attunement] funnel 10% energy and gain +3 stacks of [Rapport]. Max [Rapport] stacks increased to 7, each granting +5% Afflatus Advantage DMG. [Feast Call] deals 3000% Mental DMG, +300% per [Rapport] stack.
+  P3: [Babble-Gabble: Aegis]: -20% Critical DEF, max additional Critical DEF reduction now -21%. [Sneaky-Peaky: Aegis] +20% DMG Bonus, max additional DMG Bonus now +21%.
+  P4: [Adar Llwch Gwin]: Increases ATK/Max HP equal to 10% of Rhiannon's ATK/Max HP (up to +310/1550).
+  P5: [The Eagle-Taming Witch]: Upon entering combat, gain 2 stacks of [Rapport]. Funnel 100% energy into [Raptor Kinship]. Upon consuming [Attunement] funnel 12.5% energy and gain +4 stacks of [Rapport]. Max [Rapport] stacks increased to 7. [Feast Call] deals 5000% Mental DMG, +500% per [Rapport] stack.
+
+Rubuska            | 6★  | Mineral     | Reality  | v3.1       | Dec. 11, 2025   | R:ATK   | Heal, Support, Bloodtithe
+  P1: Victory Belongs to 'Rubuska the First'!: [Shadow Feast]'s duration is increased to 2. The amount of cleared [Shadow Cloak] points transferred to the target is increased to 35%. The proportion of Critical DMG/Ultimate Might gained from [Shadow Feast]'s additional [Shadow Cloak] points is increased to 100%.
+  P2: Cheerful Piper: The maximum amount of [Shadow Cloak] points is increased to 18% of Rubuska's Max HP when entering battle. The proportion of [Shadow Cloak] points gained through [Shadow Friend]'s HP loss effect is increased to 100%.
+  P3: Midnight Prank: At Incantation rank 1/2/3, Reality DMG dealt is increased to 180/270/450%.
+  P4: Happy Piper: After an ally is attacked, the HP recovery for all allies is increased to (own Max HP x16%).
+  P5: Happy Piper: For allies with [Shadow Friend], the amount of [Shadow Cloak] points required for every +1% Critical DMG/Ultimate Might is reduced to 100/200.
+
+Satsuki            | 5★  | Plant       | Mental   | v1.0       | Oct. 26, 2023   | R:DMG   | DPS, Control
+  P1: Walk Down the Sakura: Mental DMG increased to 600%.
+  P2: Handcuffed Thief's effect changes to: at 1/2/3 stars, deals 220/250/380% Mental DMG.
+  P3: Walk Down the Sakura's effect changes to: deals 650% Mental DMG.
+  P4: Dancer of Izu's effect changes to Penetration Rate +40%.
+  P5: Walk Down the Sakura's effect changes to: deals 750% Mental DMG.
+
+Semmelweis         | 6★  | Mineral     | Reality  | v1.9       | Sep. 19, 2024   | R:ATK   | Support, DPS, HP Sacrifice
+  P1: And So It Rises Again: [Blood Domain]'s deployed effect is now: Whenever an ally attacks, for every 10% of their Missing HP, gain an additional DMG Bonus +7.5% (up to 60%).
+  P2: Blood Thirst: When in the [Feral Instinct] status, for every HP loss effect suffered by any ally when an ally takes an action, this [Truth Revealed] now deals an additional Reality DMG +45%.
+  P3: And So It Rises Again: When in the [Feral Instinct] status, [Truth Revealed]'s Reality DMG dealt to all enemies is increased to 120%.
+  P4: Signature Floppy: Reality DMG is increased to 260/390/630%.
+  P5: Blood Thirst: When in the [Feral Instinct] status, for every HP loss effect suffered by any ally when an ally takes an action, this [Truth Revealed] now deals an additional Reality DMG +60%.
+
+Sentinel           | 6★  | Mineral     | Reality  | v3.0       | Oct. 30, 2025   | R:DMG   | DPS, Bloodtithe, Support
+  P1: [Sin Brought to Light]: [Dread Bullet]'s Critical Rate bonus is increased to 40%; when attacking, DMG Bonus multiplier based on Max HP is increased to 0.3%. The ratio of [Bloodtithe] points increased from [Fresh Wound] is increased to 100%.
+  P2: [Night Watch]: The number of [Dread Bullet] stacks granted to self and the adjacent ally in front is increased to 9/12/18. At the start of the round, the number of [Locked On] stacks granted by [Hour of Repentance] is increased to 3.
+  P3: [Expiation]: The Reality DMG dealt is increased to 150/225/375%. [Retribution] multiplier granted by [Hour of Repentance] is increased to 15%.
+  P4: [Infernal Mercy]: The Reality DMG dealt is increased to 450%.
+  P5: [Sin Brought to Light]: [Dread Bullet]'s Critical Rate bonus is increased to 60%; when attacking, DMG Bonus multiplier based on Max HP is increased to 0.4%; the excess Critical Rate to Critical DMG conversion rate is increased to 100%.
+
+Shamane            | 6★  | Beast       | Reality  | v1.3       | Jan. 18, 2024   | R:DMG   | DPS, Burst DMG, Debuff
+  P1: Inheritance of Wisdom's effect changes to: when entering battle, gains 3 additional stacks of [Nature's Blessing].
+  P2: Edict of Atman's effect changes to: Critical Rate to main target +60%.
+  P3: Apprentice's Dance's effect changes to: at 1/2/3 stars, deals 220/280/500% Reality DMG.
+  P4: Edict of Atman's effect changes to: deals 300% Reality DMG to all enemies.
+  P5: Edict of Atman's effect changes to: Critical Rate to main target +100%.
+
+Silverwing Eagle   | 5★  | Plant       | Reality  | vCN 3.7    | CN Only         | R:CRIT  | DPS, Follow-up Attack, Support
+  P1: [Chaos Bullet]: Reality DMG at Incantation Rank 1/2/3 increased to 300/450/750%.
+  P2: [321BOOM]: Reality DMG at Incantation Rank 1/2/3 increased to 240/360/600%.
+  P3: [Environmental Scout]: [Lorentz Tracking Method] Reality DMG increased to 300%.
+  P4: [Energy Transfer Theory]: Reality DMG increased to 1000%, additional Reality DMG per type of [Neg Status] increased to 250%.
+  P5: [Environmental Scout]: For each type of [Neg Status] the target has, Ultimate Might increased to +10%, Critical Rate increased to +10%, Critical DMG increased to +18%; Moxie gained when entering battle increased to 3.
+
+Sonetto            | 5★  | Mineral     | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | DPS, Support, Control
+  P1: Unrestricted Chant's effect changes to: if the caster is in [Stats Up] or [Pos Status], Penetration Rate +16%.
+  P2: Commandment V's effect changes to: at 1/2/3 stars, deals 220/230/350% Reality DMG.
+  P3: Exhortation IX's effect changes to: Penetration Rate +15%.
+  P4: Unrestricted Chant's effect changes to: if the caster is in [Stats Up] or [Pos Status], Penetration Rate +24%.
+  P5: Unrestricted Chant's effect changes to: if the caster is in [Stats Up] or [Pos Status], Penetration Rate +32%.
+
+Sotheby            | 6★  | Plant       | Reality  | v1.0       | Oct. 26, 2023   | R:ATK   | Poison, Heal, DPS
+  P1: Mix Them All Up!: Reality DMG increased to 450%.
+  P2: Triple the Dose!: [Poison] status inflicted by the skill deals (the caster's ATK x40%) Genesis DMG.
+  P3: Concentrated Essence!: HP +(the caster's ATK x60/90/150%).
+  P4: Mix Them All Up!: Reality DMG increased to 500%.
+  P5: Triple the Dose!: [Poison] status inflicted by the skill deals (the caster's ATK x50%) Genesis DMG.
+
+Spathodea          | 6★  | Beast       | Reality  | v1.5       | Apr. 18, 2024   | R:DMG   | DPS, Burst DMG, Burn
+  P1: Little Boxer: Critical DMG increased to 70%.
+  P2: Flame Flower: Critical Rate increased to 50%.
+  P3: Flame Within the Fire: Critical DMG increased to 70%. Extra Critical DMG increased to 70%.
+  P4: Little Boxer: At Incantation rank 1/2/3, Reality DMG increased to 220/330/550%.
+  P5: Flame Within the Fire: Reality DMG increased to 750%. Critical DMG increased to 100%. Extra Critical DMG increased to 100%.
+
+Sputnik            | 3★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:DEF   | DEF, Control
+  P1: NDA Keeper: Mental DMG increased to 400%.
+  P2: Revolving Momentum's effect changes to: additionally deals Mental DMG when the caster's HP is above 40%.
+  P3: NDA Keeper: Mental DMG increased to 450%.
+  P4: Revolving Momentum's effect changes to: additionally deals Mental DMG when the caster's HP is above 30%.
+  P5: NDA Keeper: Mental DMG increased to 500%.
+
+Sweetheart         | 5★  | Beast       | Reality  | v1.0       | Oct. 26, 2023   | R:CRIT  | DPS, Control
+  P1: A Good Dream Tonight's effect changes to: deals 450% Reality DMG. Reality DEF and Mental DEF -30%.
+  P2: Dud: at Incantation rank 1/2/3, Reality DMG increased to 220/330/550%.
+  P3: Slight Breeze's effect changes to: at 1/2/3 stars, additionally deals 50/75/125% Reality DMG to enemies in [Stats Down], [Neg Status] or [Control].
+  P4: A Good Dream Tonight: Reality DMG increased to 500%.
+  P5: A Good Dream Tonight's effect changes to: deals 600% Reality DMG.
+
+Tennant            | 5★  | Beast       | Reality  | v2.8       | Sep. 19, 2025   | R:ATK   | Shield, Debuff, DPS
+  P1: A Sincere Heart's effect changes to: deals 600% Reality DMG.
+  P2: A Shiny Diamond: at Incantation rank 1/2/3, Reality DMG increased to 220/330/550%.
+  P3: A Sincere Heart's effect changes to: deals 650% Reality DMG.
+  P4: A Bouquet of Galaxy's effect changes to: at 1/2/3 stars, grants a [Shield] with (the caster's ATK x90/135/225%) HP on all allies.
+  P5: A Sincere Heart's effect changes to: deals 700% Reality DMG.
+
+The Fool           | 3★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:DEF   | DEF
+  P1: Unexpected and Improvised's effect changes to: deals 280% Mental DMG.
+  P2: The Sage's effect changes to: at 1/2/3 stars, deals 220/280/450% Mental DMG.
+  P3: The Fool's effect changes to: at 1/2 stars, [Corrode] deals (current HP x20/30%) Genesis DMG.
+  P4: Unexpected and Improvised's effect changes to: deals 310% Mental DMG.
+  P5: Unexpected and Improvised's effect changes to: deals 350% Mental DMG.
+
+Tooth Fairy        | 6★  | Star        | Mental   | v1.2       | Dec. 7, 2023    | R:ATK   | Heal, Debuff, Purify
+  P1: Song for the Bad Tooth: Mental DMG increased to 600%.
+  P2: Baby Tooth Collector: Critical Resist and Critical DEF decrease +1 round for target.
+  P3: Empty Gums: At Incantation rank 1/2/3, Mental DMG increased to 170/280/500%.
+  P4: Lullaby: At Incantation Rank 1/2/3, HP +(the caster's ATK x90/135/225%) for all allies.
+  P5: Baby Tooth Collector: Critical Resist and Critical DEF -25% for target.
+
+TTT                | 4★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:DEF   | DEF, Dispeller
+  P1: Unplug It, Now!'s effect changes to: deals 225% Mental DMG.
+  P2: Cyber Defense's effect changes to: at 1/2/3 stars, deals 220/280/500% Mental DMG.
+  P3: Unplug It, Now!'s effect changes to: deals 275% Mental DMG.
+  P4: Electricity Security's effect changes to: this attack enjoys Penetration Rate +40%.
+  P5: Unplug It, Now!'s effect changes to: deals 300% Mental DMG.
+
+Tuesday            | 6★  | Spirit      | Mental   | v2.1       | Dec. 5, 2024    | R:ATK   | Debuff, Poison, Support
+  P1: Please, Come on In: The instances of [Poison] inflicted is increased to 2. The additional Genesis DMG is increased to (Tuesday's ATK x number of instances of [Poison] on the target x50%).
+  P2: In Mother's Arms: At incantation rank 1/2/3, the Genesis DMG Taken is now +30%/+40%/+50%, and the Critical Resist Rate is now -25% (-30% to targets in the [Poison] status).
+  P3: Please, Come on In: The instances of [Poison] inflicted is increased to 3. The additional Genesis DMG is increased to (Tuesday's ATK x number of instances of [Poison] on the target x70%).
+  P4: At Your Service: The Genesis DMG Dealt granted to self is now +35%.
+  P5: The Horror's Delight: At incantation rank 1/2/3, the Mental DMG dealt is increased to 210%/310%/535%, and inflicts 1 instance of the same [Poison] on another random, legal enemy target if able, now repeating up to 3/4/5 times.
+
+Twins Sleep        | 3★  | Spirit      | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | Debuff, Control
+  P1: Good Children Sleep Well: Mental DMG increased to 500%.
+  P2: Pincer Movement: at rank 1/2/3, deals 220/230/400% Mental DMG.
+  P3: Good Children Sleep Well's effect changes to: deals 550% Mental DMG.
+  P4: Hide and Seek's effect changes to: at 1/2/3 stars, Critical DEF -30/40/50%.
+  P5: Good Children Sleep Well: Mental DMG increased to 600%.
+
+Ulrich             | 6★  | Intellect   | Reality  | v2.4       | Mar. 27, 2025   | R:ATK   | Dynamo, Support, Extra Action
+  P1: The First Rhythm: For every stack of [Decryption Key] in [Frequency Analysis], Ultimate Might is changed to +5.5%. For every stack of [Decryption Key] in [Structure Analysis], DMG Taken Reduction is changed to -5.5%.
+  P2: The Sum of Infinity: When [Hyper Analysis] is cast from a completed channel, the Reality DMG dealt to all enemies is increased to 900%.
+  P3: The First Rhythm: If under [Pulsing Field Lv.3], when [Hyper Analysis] is cast from a completed channel, the additional Reality DMG dealt based on the number of stacks of [Decryption Key] is increased to 175%.
+  P4: The First Rhythm: When [Surge Spike] is cast, the additional Reality DMG dealt based on the number of stacks of [Decryption Key] in [Structure Analysis]/[Frequency Analysis] is increased to 25%.
+  P5: The Sum of Infinity: When [Hyper Analysis] is cast from a completed channel, the Reality DMG dealt to all enemies is increased to 1050% and the additional Reality DMG dealt based on the number of stacks of Decryption Key is increased to 175%.
+
+Ulu                | 5★  | Mineral     | Mental   | v1.5       | Apr. 18, 2024   | R:ATK   | Support, DPS, Burn
+  P1: Opening Ceremony: At Incantation rank 1/2/3, Mental DMG increased to 180/270/450%.
+  P2: Opening Ceremony: At Incantation rank 1/2/3, Penetration Rate increased to 30/35/40%.
+  P3: Beating Heart: At Incantation rank 1/2/3, Mental DMG increased to 140/210/350%.
+  P4: Fire Worship: Recover increased to (Missing HP x10%) HP for all allies.
+  P5: Indomitable Fire, Scorching Heart: DMG Dealt increased to +20% for all allies.
+
+Vila               | 6★  | Plant       | Mental   | v1.8       | Aug. 8, 2024    | R:ATK   | Support, Heal, Purify
+  P1: Beating Heart: The Critical Rate and Critical DMG bonuses from [Song of Generosity]/[Song of Passion] are increased to 30/30%.
+  P2: Beating Heart: [Song of Passion]'s additional DMG Dealt is increased to 80/150/230%.
+  P3: Beating Heart: The Critical Rate and Critical DMG bonuses from [Song of Generosity]/[Song of Passion] are increased to 40/40%.
+  P4: Beating Heart: [Song of Passion]'s additional DMG Dealt is increased to 110/180/260%.
+  P5: Bright Prospect: [Rusalka]'s duration is increased to 4 rounds.
+
+Voyager            | 6★  | Star        | Mental   | v1.0       | Oct. 26, 2023   | R:ATK   | DPS, Control, Debuff
+  P1: Galaxy on the Strings: If the target is in [Confusion] status, additional Mental DMG increased to 175%.
+  P2: Starlight Sonata: At Incantation rank 1/2/3, Mental DMG increased to 165/170/250%.
+  P3: Galaxy on the Strings: If the target is in [Confusion] status, additional Mental DMG increased to 250%.
+  P4: Galaxy on the Strings: If the target is in [Confusion] status, additional Mental DMG increased to 325%.
+  P5: Galaxy on the Strings: If the target is in [Confusion] status, additional Mental DMG increased to 400%.
+
+White Rum          | 4★  | Intellect   | Reality  | v2.2       | Jan. 9, 2025    | R:DMG   | DPS, Control, Shift
+  P1: Privateering License: Gain 2 stacks of [Rousing Morale] for each position shifted backward, and gain 2 stacks of [Sturdiness] for each position shifted forward.
+  P2: Boundless Sea, Limitless Sky: For every position shifted, the DMG Dealt is increased to +25%.
+  P3: Boundless Sea, Limitless Sky: Reality DMG is increased to 300%.
+  P4: Boundless Sea, Limitless Sky: If at least 3 positions were shifted, this attack now ignores 100% Daze resistance.
+  P5: Port Side Barrage: At incantation rank 1/2/3, the Reality DMG is increased to 100/150/250%.
+
+Willow             | 6★  | Plant       | Mental   | v2.3       | Feb. 20, 2025   | R:DMG   | DPS, Poison, Burst DMG
+  P1: Hag's Advice: All [Hag's Bane] inflicted by Willow is increased to (the user's ATK x24%) Genesis DMG.
+  P2: Hag's Steps: The damage of all [Poison] effects inflicted by this passive is increased to (the user's ATK x40%) Genesis DMG. In addition, each time Willow's [Hag's Bane] resolves, the compounding damage the target takes from each subsequent resolve of Hag's Bane is increased to 45%.
+  P3: Hag's Advice: At incantation rank 1/2/3, the instances of Poisons that can be converted is increased to 4/5/6.
+  P4: Hag's Steps: When another ally actively casts and attacks an enemy with an incantation, the instances of [Poison] Willow inflicts on the main target is increased to 3.
+  P5: Hag's Advice: Each time Willow's [Hag's Bane] resolves, the compounding damage the target takes from each subsequent resolve of Hag's Bane is increased to 50%.
+
+Windsong           | 6★  | Star        | Mental   | v1.8       | Aug. 8, 2024    | R:DMG   | Burst DMG, DPS, Extra Action
+  P1: Rehabilitation: at rank 1/2/3 incantation, Mental DMG dealt is increased to 200/290/480%, and the additional Mental DMG dealt by spending Eureka is increased to 90/130/200%.
+  P2: Interdisciplinary Research: When entering battle, the Critical Rate and Critical DMG increase is now +25%.
+  P3: Long Long Journey: The Eureka gained is increased to 5.
+  P4: Practicability: At rank 1/2 incantation, the Mental DMG is increased to 180/230%.
+  P5: Rehabilitation: At rank 1/2/3 incantation, the Mental DMG dealt is increased to 220/320/520%, and the additional Mental DMG dealt by spending Eureka is increased to 110/160/240%.
+
+X                  | 5★  | Intellect   | Reality  | v1.7       | Jul. 11, 2024   | R:DMG   | Dispeller, DPS, Control
+  P1: Minimalism and Maximalism's effect changes to: deals 300% Reality DMG.
+  P2: Anode and Cathode's effect changes to: at 1/2/3 stars, deals 220/280/500% Reality DMG.
+  P3: Minimalism and Maximalism: Reality DMG increased to 350%.
+  P4: Coffee or Tea's effect changes to: at 1/2/3 stars, deals 220/280/500% Reality DMG.
+  P5: Minimalism and Maximalism: Reality DMG increased to 400%.
+
+Yenisei            | 5★  | Star        | Mental   | v1.6       | May 30, 2024    | R:ATK   | Support, Heal, Immunity
+  P1: Action Taker: At rank 1/2/3, deals 220%/230%/400% Mental DMG.
+  P2: Overprotective: When entering combat, gain 1 extra stack of [Flow].
+  P3: The Rapids Know All: The [Shield] granted to all allies is increased to (Yenisei's Max HP x30%) HP.
+  P4: Overprotective: When entering battle, additional Healing Done +8%.
+  P5: The Rapids Know All: The [Shield] granted to all allies is increased to (Yenisei's Max HP x35%) HP.
+
+Zima               | 4★  | Plant       | Mental   | v1.6       | May 30, 2024    | R:ATK   | Support, Control
+  P1: Poem, Island, Breeze's effect changes to: deals 280% Mental DMG.
+  P2: Sparrow's effect changes to: at 1/2/3 stars, deals 220/230/350% Mental DMG.
+  P3: Paper's effect changes to: at 1/2/3 stars, DMG Heal +20/25/30%.
+  P4: Poem, Island, Breeze's effect changes to: deals 310% Mental DMG.
+  P5: Poem, Island, Breeze's effect changes to: deals 350% Mental DMG.

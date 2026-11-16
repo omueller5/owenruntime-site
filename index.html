@@ -21,6 +21,32 @@
         <a href="projects.html" class="nav-btn">Projects</a>
         <a href="mods.html" class="nav-btn">Mods</a>
         <a href="addons.html" class="nav-btn">Addons</a>
+        <a href="reverse1999.html" class="nav-btn">Reverse: 1999</a>
+
+        <!-- Admin Access Dropdown -->
+        <div class="admin-dropdown-wrapper">
+            <button type="button" class="nav-btn admin-trigger" id="admin-menu-btn">
+                🔒 Admin
+            </button>
+
+            <div class="admin-panel" id="admin-panel">
+                <div class="admin-panel-header">Admin Access</div>
+
+                <form id="admin-unlock-form" class="admin-form">
+                    <input
+                            type="password"
+                            id="admin-password"
+                            placeholder="Passphrase…"
+                            autocomplete="current-password"
+                            required
+                    />
+                    <button type="submit" class="btn primary admin-submit">Unlock</button>
+                    <p id="admin-error" class="admin-error">Incorrect passphrase</p>
+                </form>
+
+                <div id="admin-links-list" class="admin-links-list" style="display: none;"></div>
+            </div>
+        </div>
     </nav>
 </header>
 
@@ -313,6 +339,73 @@
 
     // OreFeller: downloads (CurseForge Bedrock addons)
     setAddonDownloads("of-total-downloads", "minecraft-bedrock/addons/orefeller");
+</script>
+
+<script src="admin-config.js"></script>
+<script>
+    // =========================================================
+    // Dropdown Logic
+    // =========================================================
+    const adminMenuBtn = document.getElementById("admin-menu-btn");
+    const adminPanel = document.getElementById("admin-panel");
+    const adminForm = document.getElementById("admin-unlock-form");
+    const adminError = document.getElementById("admin-error");
+    const adminLinksList = document.getElementById("admin-links-list");
+
+    if (adminMenuBtn && adminPanel) {
+        adminMenuBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            adminPanel.classList.toggle("open");
+            if (adminPanel.classList.contains("open")) {
+                const input = document.getElementById("admin-password");
+                if (input && adminForm.style.display !== "none") input.focus();
+            }
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!adminPanel.contains(e.target) && e.target !== adminMenuBtn) {
+                adminPanel.classList.remove("open");
+            }
+        });
+    }
+
+    function showAdminLinks() {
+        if (typeof ADMIN_LINKS === "undefined") return;
+        if (adminForm) adminForm.style.display = "none";
+        if (adminError) adminError.style.display = "none";
+        if (adminMenuBtn) {
+            adminMenuBtn.textContent = "🔓 Admin";
+            adminMenuBtn.classList.add("unlocked");
+        }
+
+        if (adminLinksList) {
+            adminLinksList.innerHTML = ADMIN_LINKS.map(item => `
+                <a class="admin-link-item" href="${item.url}" ${item.url.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+                    <span>${item.name}</span>
+                    <span class="admin-link-sub">${item.sub} ↗</span>
+                </a>
+            `).join("");
+            adminLinksList.style.display = "flex";
+        }
+    }
+
+    if (adminForm) {
+        adminForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const pwInput = document.getElementById("admin-password");
+            if (typeof ADMIN_PASSWORD !== "undefined" && pwInput.value === ADMIN_PASSWORD) {
+                sessionStorage.setItem("owenlab_admin_unlocked", "true");
+                showAdminLinks();
+            } else {
+                if (adminError) adminError.style.display = "block";
+                pwInput.value = "";
+            }
+        });
+    }
+
+    if (typeof ADMIN_PASSWORD !== "undefined" && sessionStorage.getItem("owenlab_admin_unlocked") === "true") {
+        showAdminLinks();
+    }
 </script>
 </body>
 </html>
