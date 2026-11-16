@@ -1,25 +1,38 @@
-// Function to verify login using browser storage
 function handleAdminLogin(inputPassword) {
     const savedConfig = localStorage.getItem('owenlab_admin_config');
+    console.log("Raw localStorage config:", savedConfig);
 
     if (!savedConfig) {
-        alert("No configuration found in this browser. Please run the setup command first.");
+        alert("No configuration found in localStorage!");
         return false;
     }
 
     const config = JSON.parse(savedConfig);
+    console.log("Parsed config object:", config);
 
-    // Hash the user's typed password using SHA-256 to compare with stored hash
-    crypto.subtle.digest("SHA-256", new TextEncoder().encode(inputPassword)).then(buffer => {
-        const hashArray = Array.from(new Uint8Array(buffer));
-        const hashedPassword = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    // Direct plaintext comparison
+    if (inputPassword === config.password) {
+        console.log("Login successful! Rendering links...");
+        renderAdminLinks(config.links);
+    } else {
+        alert("Incorrect password.");
+        console.log("Password mismatch. Input was:", inputPassword, "Expected was:", config.password);
+    }
+}
 
-        if (hashedPassword === config.passwordHash) {
-            console.log("Login successful!");
-            // Redirect or load your admin links (config.jellyfinUrl, config.serverHtml, etc.)
-            window.location.href = config.serverHtml;
-        } else {
-            alert("Incorrect password.");
-        }
+function renderAdminLinks(links) {
+    const container = document.getElementById('links-container');
+    if (!container) {
+        console.error("Error: #links-container element not found in HTML!");
+        return;
+    }
+
+    container.innerHTML = '';
+    links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.innerText = `${link.name} - ${link.sub}`;
+        a.style.display = "block";
+        container.appendChild(a);
     });
 }
