@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minecraft Server — Owen Lab</title>
+
+    <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        .server-ip-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: #101221;
+            border: 1px solid #23263a;
+            border-radius: 12px;
+            padding: 1.1rem 1.4rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .server-ip-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .server-ip-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8689a1;
+        }
+
+        .server-ip-address {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f5f5f5;
+        }
+
+        .server-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .status-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.45rem;
+            background: #f1c40f;
+            box-shadow: 0 0 8px rgba(241, 196, 15, 0.7);
+        }
+
+        .status-dot.online {
+            background: #2ecc71;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.75);
+        }
+
+        .status-dot.offline {
+            background: #e74c3c;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.75);
+        }
+
+        .plugin-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .back-bar {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+<header class="top-nav">
+    <div class="nav-left">
+        <a href="index.html" class="brand">Owen Lab</a>
+    </div>
+
+    <nav class="nav-links">
+        <a href="index.html" class="nav-btn">Overview</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="mods.html" class="nav-btn">Mods</a>
+        <a href="addons.html" class="nav-btn">Addons</a>
+        <a href="reverse1999.html" class="nav-btn">Reverse: 1999</a>
+        <a href="server.html" class="nav-btn active">Server</a>
+    </nav>
+</header>
+
+<main>
+    <section id="server-overview" class="section">
+        <h2>Minecraft Server</h2>
+        <p>
+            A Purpur survival server running Minecraft Java Edition with quality-of-life
+            plugins and a real-time web world map powered by Squaremap.
+        </p>
+        <br>
+
+        <!-- Live Status Pills -->
+        <div class="status-row">
+            <span class="pill status-dev" id="status-pill">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="status-text">Checking status…</span>
+            </span>
+            <span class="pill" id="players-pill">Players: 0 / 20</span>
+            <span class="pill" id="version-pill">Version: Java 26.2 – 26.3</span>
+            <span class="pill" id="map-pill">Live Map: Offline</span>
+        </div>
+
+        <!-- Server Address + Copy + Aternos + Map Buttons -->
+        <div class="server-ip-bar">
+            <div class="server-ip-info">
+                <span class="server-ip-label">Java Server Address</span>
+                <span class="server-ip-address" id="server-ip">map.owenlab.dev</span>
+            </div>
+
+            <div class="server-actions">
+                <button type="button" class="btn ghost" id="copy-ip-btn">Copy Address</button>
+                <a href="https://omueller5.aternos.me" target="_blank" rel="noopener noreferrer" class="btn ghost">
+                    Aternos Server Page ↗
+                </a>
+                <a href="https://map.owenlab.dev" target="_blank" rel="noopener noreferrer" class="btn primary">
+                    Open Live Map →
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="cards">
+            <a class="card mod-card" href="https://omueller5.aternos.me" target="_blank" rel="noopener noreferrer">
+                <div class="card-label">Server Host</div>
+                <h3>Aternos Status & Start</h3>
+
+                <div class="plugin-tags">
+                    <span class="pill">omueller5.aternos.me</span>
+                    <span class="pill">On-Demand</span>
+                </div>
+
+                <p>
+                    Open the Aternos server page to check queue status, wake the server up
+                    if it is asleep, or copy the server connection address.
+                </p>
+
+                <span class="card-cta">Open Aternos page →</span>
+            </a>
+
+            <a class="card mod-card" href="https://map.owenlab.dev" target="_blank" rel="noopener noreferrer">
+                <div class="card-label">Web Map</div>
+                <h3>Squaremap</h3>
+
+                <div class="plugin-tags">
+                    <span class="pill">Real-Time</span>
+                    <span class="pill">Player Tracker</span>
+                </div>
+
+                <p>
+                    Explore rendered chunks, biomes, spawn markers, and live player
+                    locations directly in your browser whenever the server is online.
+                </p>
+
+                <span class="card-cta">Launch map.owenlab.dev →</span>
+            </a>
+
+            <div class="card mod-card">
+                <div class="card-label">Gameplay</div>
+                <h3>Installed Plugins</h3>
+
+                <div class="plugin-tags">
+                    <span class="pill">Purpur</span>
+                    <span class="pill">ViaVersion</span>
+                    <span class="pill">AxGraves</span>
+                    <span class="pill">AxShulkers</span>
+                    <span class="pill">AutoTreeChop</span>
+                    <span class="pill">Better Veinminer</span>
+                    <span class="pill">HuskHomes</span>
+                </div>
+
+                <p>
+                    Survival-focused quality-of-life enhancements including graves on death,
+                    portable shulker boxes, tree felling, vein mining, and personal homes.
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons Back to Main Site -->
+        <div class="back-bar">
+            <a href="index.html" class="btn ghost">← Back to Overview</a>
+            <a href="mods.html" class="btn ghost">View Mods</a>
+            <a href="projects.html" class="btn ghost">View Projects</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© <span id="year"></span> Owen Lab. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Copy IP Button
+    const DISPLAY_HOST = "map.owenlab.dev";
+    const QUERY_HOST = "omueller5.aternos.me";
+    const copyBtn = document.getElementById("copy-ip-btn");
+
+    if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(DISPLAY_HOST);
+                copyBtn.textContent = "Copied!";
+                setTimeout(() => {
+                    copyBtn.textContent = "Copy Address";
+                }, 2000);
+            } catch {
+                copyBtn.textContent = "Select & Copy";
+            }
+        });
+    }
+
+    // Live Server Status Check via mcstatus.io
+    async function updateServerStatus() {
+        const statusPill = document.getElementById("status-pill");
+        const statusDot = document.getElementById("status-dot");
+        const statusText = document.getElementById("status-text");
+        const playersPill = document.getElementById("players-pill");
+        const versionPill = document.getElementById("version-pill");
+        const mapPill = document.getElementById("map-pill");
+
+        try {
+            const res = await fetch(`https://api.mcstatus.io/v2/status/java/${QUERY_HOST}?query=false`, {
+                cache: "no-store"
+            });
+            const data = await res.json();
+
+            const motdClean = (data.motd?.clean || "").toLowerCase();
+            const rawVersion = (data.version?.name_clean || "").trim();
+
+            // Aternos returns online:true with max players = 0 or "offline" in MOTD/version when asleep
+            const isActuallyOnline =
+                data.online === true &&
+                (data.players?.max ?? 0) > 0 &&
+                !motdClean.includes("server is offline") &&
+                !rawVersion.toLowerCase().includes("offline");
+
+            if (isActuallyOnline) {
+                statusPill.className = "pill status-done";
+                statusDot.className = "status-dot online";
+                statusText.textContent = "Online";
+
+                const online = data.players?.online ?? 0;
+                const max = data.players?.max ?? 20;
+                playersPill.textContent = `Players: ${online} / ${max}`;
+
+                const cleanVer = rawVersion.replace(/^Purpur\s+/i, "") || "26.2 – 26.3";
+                versionPill.textContent = `Version: Java ${cleanVer}`;
+                mapPill.textContent = "Live Map: Online";
+            } else {
+                statusPill.className = "pill status-hold";
+                statusDot.className = "status-dot offline";
+                statusText.textContent = "Offline (Asleep)";
+                playersPill.textContent = "Players: 0 / 20";
+                versionPill.textContent = "Version: Java 26.2 – 26.3";
+                mapPill.textContent = "Live Map: Offline";
+            }
+        } catch {
+            statusPill.className = "pill status-hold";
+            statusDot.className = "status-dot offline";
+            statusText.textContent = "Status Unavailable";
+            playersPill.textContent = "Players: 0 / 20";
+            versionPill.textContent = "Version: Java 26.2 – 26.3";
+            mapPill.textContent = "Live Map: Offline";
+        }
+    }
+
+    updateServerStatus();
+    setInterval(updateServerStatus, 60000);
+</script>
+</body>
+</html>
