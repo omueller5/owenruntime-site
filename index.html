@@ -369,8 +369,7 @@
         });
     }
 
-    function showAdminLinks() {
-        if (typeof ADMIN_LINKS === "undefined") return;
+    function showAdminLinks(links) {
         if (adminForm) adminForm.style.display = "none";
         if (adminError) adminError.style.display = "none";
         if (adminMenuBtn) {
@@ -379,7 +378,7 @@
         }
 
         if (adminLinksList) {
-            adminLinksList.innerHTML = ADMIN_LINKS.map(item => `
+            adminLinksList.innerHTML = links.map(item => `
                 <a class="admin-link-item" href="${item.url}" ${item.url.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ''}>
                     <span>${item.name}</span>
                     <span class="admin-link-sub">${item.sub} ↗</span>
@@ -393,9 +392,18 @@
         adminForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const pwInput = document.getElementById("admin-password");
-            if (typeof ADMIN_PASSWORD !== "undefined" && pwInput.value === ADMIN_PASSWORD) {
+
+            const savedConfig = localStorage.getItem('owenlab_admin_config');
+            if (!savedConfig) {
+                if (adminError) adminError.style.display = "block";
+                return;
+            }
+
+            const config = JSON.parse(savedConfig);
+
+            if (pwInput.value === config.password) {
                 sessionStorage.setItem("owenlab_admin_unlocked", "true");
-                showAdminLinks();
+                showAdminLinks(config.links);
             } else {
                 if (adminError) adminError.style.display = "block";
                 pwInput.value = "";
@@ -403,9 +411,14 @@
         });
     }
 
-    if (typeof ADMIN_PASSWORD !== "undefined" && sessionStorage.getItem("owenlab_admin_unlocked") === "true") {
-        showAdminLinks();
+    if (sessionStorage.getItem("owenlab_admin_unlocked") === "true") {
+        const savedConfig = localStorage.getItem('owenlab_admin_config');
+        if (savedConfig) {
+            const config = JSON.parse(savedConfig);
+            showAdminLinks(config.links);
+        }
     }
 </script>
 </body>
 </html>
+```[cite: 2]
